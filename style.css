@@ -1,0 +1,87 @@
+/* Establece un estilo de caja para todos los elementos */
+* {
+  box-sizing: border-box;
+}
+/* Establece la fuente predeterminada para el cuerpo */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f7f7f7; /* Color de fondo para todo el cuerpo */
+  margin: 0; /* Elimina el margen predeterminado del cuerpo */
+  padding: 0; /* Elimina el relleno predeterminado del cuerpo */
+}
+/* Estilo para el encabezado */
+header {
+  background-color: #ff6600; /* Color de fondo del encabezado */
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+/* Contenedor para los elementos flexibles */
+section {
+  display: -webkit-flex;
+  display: flex;
+  background-color: #f7f7f7; /* Color de fondo para la sección */
+  padding: 20px;
+}
+/* Estilo para el menú de navegación */
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #ffcc33; /* Color de fondo para el menú */
+  padding: 20px;
+}
+/* Estilo para la lista dentro del menú */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+/* Estilo para los elementos de la lista */
+nav li {
+  margin-bottom: 10px;
+}
+/* Estilo para los enlaces en la lista */
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s; /* Agrega una transición de color suave */
+}
+/* Cambiar el color del enlace cuando se pasa el ratón sobre él */
+nav a:hover {
+  color: #ff6600; /* Color del enlace al pasar el ratón */
+}
+/* Estilo para el contenido */
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #fff; /* Color de fondo para el artículo */
+  padding: 20px;
+  border-left: 1px solid #ccc; /* Agrega un borde izquierdo para separar el menú del contenido */
+}
+/* Estilo para el pie de página */
+footer {
+  background-color: #ff6600; /* Color de fondo del pie de página */
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+/* Diseño responsivo: coloca el menú y el contenido en la parte superior uno encima del otro en lugar de uno al lado del otro en pantallas pequeñas */
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+ /* Estilo CSS para hacer las imágenes responsivas */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+/* Estilos CSS para centrar los encabezados h1 */
+    h1 {
+      text-align: center;
+    }
