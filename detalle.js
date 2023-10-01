@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <p><strong>País:</strong> ${selectedCity.name.common}</p>
           <p><strong>Código CCA2:</strong> ${selectedCity.cca2}</p>
           <!-- Agrega más detalles de la ciudad aquí según tus necesidades -->
-          <button onclick="goToIndex()" class="volver-button">Volver Atrás</button>
         </div>
       `;
   
