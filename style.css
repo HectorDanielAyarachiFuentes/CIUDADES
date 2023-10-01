@@ -127,3 +127,62 @@ h2 {
       margin: 20px; /* Puedes ajustar este valor según tus preferencias */
     }
  
+
+
+
+
+/* styles.css */
+
+#city-details {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#city-details h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#city-details p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+#city-details img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  margin: 10px auto;
+}
+
+#city-details #flag {
+  border: none;
+  display: block;
+  margin: 0 auto;
+}
+
+#city-details #flag-description {
+  font-style: italic;
+  text-align: center;
+}
+
+#city-details #coat-of-arms {
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+}
+
+#city-details #start-of-week {
+  font-weight: bold;
+  text-align: center;
+}
