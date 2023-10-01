@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Muestra los detalles de la ciudad
 const cityDetails = document.getElementById("city-details");
 const cityHtml = `
-<h1>${selectedCity.name.common}</h1>
+<h1>${selectedCity.translations.spa.common}</h1>
 <p>Capital: ${selectedCity.capital[0]}</p>
 <p>Población: ${selectedCity.population}</p>
 <p>Continente: ${selectedCity.continents}</p>
