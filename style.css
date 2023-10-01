@@ -5,38 +5,43 @@
 
 /* Establece la fuente predeterminada para el cuerpo */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f7f7f7;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #f0e6d2; /* Color de papel antiguo */
   margin: 0;
   padding: 0;
 }
 
 /* Estilo para el encabezado */
 header {
-  background-color: #ff6600;
+  background-color: #8b4513; /* Color marrón */
   padding: 20px;
   text-align: center;
   font-size: 35px;
-  color: white;
+  color: #fff; /* Texto blanco */
 }
 
 /* Contenedor para los elementos flexibles */
 section {
   display: flex;
-  background-color: #f7f7f7;
+  background-color: #f0e6d2; /* Color de papel antiguo */
   padding: 20px;
   margin: 20px;
+  border: 1px solid #8b4513; /* Borde marrón */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo para el menú de navegación */
 nav {
   flex: 1;
-  background: #ffcc33;
+  background: #d2b48c; /* Color beige */
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid #8b4513; /* Borde marrón */
+  border-radius: 10px;
 }
 
 /* Estilo para la lista dentro del menú */
@@ -53,35 +58,36 @@ nav li {
 /* Estilo para los enlaces en la lista */
 nav a {
   text-decoration: none;
-  color: #333;
+  color: #8b4513; /* Color marrón */
   font-weight: bold;
   font-size: 18px;
   transition: color 0.3s, background-color 0.3s;
   display: block;
   padding: 10px;
   border-radius: 5px;
+  background-color: #f0e6d2; /* Color de papel antiguo */
 }
 
 /* Cambiar el color del enlace y el fondo al pasar el ratón sobre él */
 nav a:hover {
-  color: #ff6600;
-  background-color: #fff;
+  color: #fff; /* Texto blanco */
+  background-color: #8b4513; /* Color marrón */
 }
 
 /* Estilo para el contenido */
 article {
   flex: 3;
-  background-color: #fff;
+  background-color: #f0e6d2; /* Color de papel antiguo */
   padding: 20px;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #8b4513; /* Borde marrón */
 }
 
 /* Estilo para el pie de página */
 footer {
-  background-color: #ff6600;
+  background-color: #8b4513; /* Color marrón */
   padding: 10px;
   text-align: center;
-  color: white;
+  color: #fff; /* Texto blanco */
 }
 
 /* Diseño responsivo: coloca el menú y el contenido uno encima del otro en pantallas pequeñas */
@@ -109,80 +115,15 @@ h2 {
 /* Estilo para el enlace "Volver a la página principal" */
 .volver-link {
   text-decoration: none;
-  color: #faf8fa;
+  color: #fff; /* Texto blanco */
   margin-top: 10px;
-  background-color: #ff6600;
+  background-color: #8b4513; /* Color marrón */
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 /* Cambiar el color de fondo del enlace al pasar el ratón sobre él */
 .volver-link:hover {
-  background-color: #333;
-}
-
-
-    /* Agrega tus estilos CSS aquí si es necesario */
-    .article-container {
-      margin: 20px; /* Puedes ajustar este valor según tus preferencias */
-    }
- 
-
-
-
-
-/* styles.css */
-
-#city-details {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#city-details h1 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-#city-details p {
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 8px;
-  text-align: left;
-}
-
-#city-details img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ccc;
-  margin: 10px auto;
-}
-
-#city-details #flag {
-  border: none;
-  display: block;
-  margin: 0 auto;
-}
-
-#city-details #flag-description {
-  font-style: italic;
-  text-align: center;
-}
-
-#city-details #coat-of-arms {
-  max-width: 300px;
-  display: block;
-  margin: 0 auto;
-  border: none;
-}
-
-#city-details #start-of-week {
-  font-weight: bold;
-  text-align: center;
+  background-color: #fff; /* Texto blanco */
+  color: #8b4513; /* Color marrón */
 }
