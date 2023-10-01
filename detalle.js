@@ -15,10 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (selectedCity) {
     // Muestra los detalles de la ciudad
 const cityDetails = document.getElementById("city-details");
+const population = selectedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 const cityHtml = `
 <h1>${selectedCity.translations.spa.common}</h1>
 <p>Capital: ${selectedCity.capital[0]}</p>
-<p>Población: ${selectedCity.population}</p>
+<p>Población: ${population}</p>
 <p>Continente: ${selectedCity.continents}</p>
 <p>Bandera:</p>
 <img src="${selectedCity.flags.svg}" alt="${selectedCity.flags.alt}">
