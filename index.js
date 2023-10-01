@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const generatedIds = [];
 
       // Itera a través de todas las ciudades en el JSON
-      data.forEach((cityData) => {
+      data.forEach((cityData, index) => {
         // Obtén las traducciones en español desde "translations"
         const translations = cityData.translations;
         const officialNameInSpanish = translations.spa.official;
@@ -26,8 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Genera un enlace para cada ciudad con la ID aleatoria y agrégalo a la lista
         const cityLink = document.createElement("li");
-        cityLink.innerHTML = `<a href="detalle.html#${uniqueId}" onclick="showText('${officialNameInSpanish.toLowerCase()}')">${officialNameInSpanish}</a>`;
+        cityLink.innerHTML = `<a href="detalle.html#${uniqueId}">${officialNameInSpanish}</a>`;
         cityList.appendChild(cityLink);
+
+        // Asigna un identificador único al enlace para el manejo de clics
+        cityLink.dataset.cityIndex = index;
       });
 
       // Almacena los IDs generados en el localStorage
@@ -36,6 +39,16 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => {
       console.error("Error al cargar el JSON:", error);
     });
+
+  // Manejo de clics para toda la lista de enlaces
+  cityList.addEventListener("click", function (event) {
+    if (event.target.tagName === "A") {
+      const cityIndex = event.target.dataset.cityIndex;
+      if (cityIndex !== undefined) {
+        showText(cityIndex);
+      }
+    }
+  });
 });
 
 // Función para generar una ID aleatoria única

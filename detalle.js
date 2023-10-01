@@ -1,26 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const venezuelaDetails = document.getElementById("venezuela-details");
+  // Obtén la ID de la ciudad desde la URL
+  const cityId = window.location.hash.substring(1); // Elimina el "#" del fragmento de la URL
 
-  // Obtén los datos de Venezuela desde el localStorage
-  const data = JSON.parse(localStorage.getItem("datosciudad"));
+  // Obtén los IDs generados aleatoriamente desde localStorage
+  const generatedIds = JSON.parse(localStorage.getItem("generatedIds"));
 
-  if (data) {
-    // Encuentra la entrada correspondiente a Venezuela en los datos
-    const venezuelaData = data.find((city) => city.name.common === "Venezuela");
+  // Obtén los datos de ciudades desde localStorage
+  const cityData = JSON.parse(localStorage.getItem("datosciudad"));
 
-    if (venezuelaData) {
-      // Construye un HTML con los datos de Venezuela
-      const venezuelaHtml = `
-        <h1>${venezuelaData.name.official}</h1>
-        <p>Capital: ${venezuelaData.capital[0]}</p>
-        <p>Población: ${venezuelaData.population}</p>
-        <!-- Agrega más detalles aquí según sea necesario -->
-      `;
+  // Busca la ciudad correspondiente por la ID generada aleatoriamente
+  const selectedCity = cityData.find((city, index) => generatedIds[index] === cityId);
 
-      // Establece el HTML generado en el elemento venezuela-details
-      venezuelaDetails.innerHTML = venezuelaHtml;
-    } else {
-      venezuelaDetails.innerHTML = "<p>Datos de Venezuela no encontrados.</p>";
-    }
+  // Verifica si se encontró la ciudad
+  if (selectedCity) {
+    // Muestra los detalles de la ciudad
+    const cityDetails = document.getElementById("city-details");
+    const cityHtml = `
+      <h1>${selectedCity.name.official}</h1>
+      <p>Capital: ${selectedCity.capital[0]}</p>
+      <p>Población: ${selectedCity.population}</p>
+      <!-- Agrega más detalles según sea necesario -->
+    `;
+    cityDetails.innerHTML = cityHtml;
+  } else {
+    // Maneja el caso en el que la ciudad no se encuentra
+    console.error("Ciudad no encontrada.");
   }
 });
