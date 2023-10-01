@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
           // Genera un enlace para cada ciudad y agrégalo a la lista
           const cityLink = document.createElement("li");
-          cityLink.innerHTML = `<a href="#${officialNameInSpanish.toLowerCase()}" onclick="showText('${officialNameInSpanish.toLowerCase()}')">${officialNameInSpanish}</a>`;
+          cityLink.innerHTML = `<a href="detalle.html#${officialNameInSpanish.toLowerCase()}" onclick="showText('${officialNameInSpanish.toLowerCase()}')">${officialNameInSpanish}</a>`;
           cityList.appendChild(cityLink);
         });
       })
