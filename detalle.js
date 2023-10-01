@@ -1,35 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtén el ID de la ciudad desde la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const cityName = urlParams.get("city");
-  
-    // Obtén los datos de las ciudades desde el localStorage
-    const cityData = JSON.parse(localStorage.getItem("datosciudad"));
-  
-    // Busca la ciudad por su nombre
-    const selectedCity = cityData.find((city) => city.translations.spa.official.toLowerCase() === cityName);
-  
-    if (selectedCity) {
-      // Crea el contenido HTML con los detalles de la ciudad
-      const detalleHtml = `
-        <header class="header">
-          <h1>${selectedCity.translations.spa.official}</h1>
-        </header>
-        <div class="city-card">
-          <h2>${selectedCity.translations.spa.common}</h2>
-          <p><strong>País:</strong> ${selectedCity.name.common}</p>
-          <p><strong>Código CCA2:</strong> ${selectedCity.cca2}</p>
-          <!-- Agrega más detalles de la ciudad aquí según tus necesidades -->
-        </div>
+  const venezuelaDetails = document.getElementById("venezuela-details");
+
+  // Obtén los datos de Venezuela desde el localStorage
+  const data = JSON.parse(localStorage.getItem("datosciudad"));
+
+  if (data) {
+    // Encuentra la entrada correspondiente a Venezuela en los datos
+    const venezuelaData = data.find((city) => city.name.common === "Venezuela");
+
+    if (venezuelaData) {
+      // Construye un HTML con los datos de Venezuela
+      const venezuelaHtml = `
+        <h1>${venezuelaData.name.official}</h1>
+        <p>Capital: ${venezuelaData.capital[0]}</p>
+        <p>Población: ${venezuelaData.population}</p>
+        <!-- Agrega más detalles aquí según sea necesario -->
       `;
-  
-      // Agrega el contenido al contenedor cityDetails
-      const cityDetails = document.getElementById("city-details");
-      cityDetails.innerHTML = detalleHtml;
+
+      // Establece el HTML generado en el elemento venezuela-details
+      venezuelaDetails.innerHTML = venezuelaHtml;
     } else {
-      // Si no se encuentra la ciudad, muestra un mensaje de error
-      const cityDetails = document.getElementById("city-details");
-      cityDetails.innerHTML = "<p>Ciudad no encontrada.</p>";
+      venezuelaDetails.innerHTML = "<p>Datos de Venezuela no encontrados.</p>";
     }
-  });
-  
+  }
+});
