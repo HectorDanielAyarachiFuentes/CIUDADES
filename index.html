@@ -42,16 +42,17 @@
       fetch(jsonURL)
         .then((response) => response.json())
         .then((data) => {
-          // Obtén las traducciones en español desde "translations"
-          const translations = data[0].translations;
+          // Itera a través de todas las ciudades en el JSON
+          data.forEach((cityData) => {
+            // Obtén las traducciones en español desde "translations"
+            const translations = cityData.translations;
+            const officialNameInSpanish = translations.spa.official;
     
-          // Itera a través de las traducciones para obtener el nombre en español
-          const officialNameInSpanish = translations.spa.official;
-    
-          // Genera el enlace
-          const cityLink = document.createElement("li");
-          cityLink.innerHTML = `<a href="#${officialNameInSpanish.toLowerCase()}" onclick="showText('${officialNameInSpanish.toLowerCase()}')">${officialNameInSpanish}</a>`;
-          cityList.appendChild(cityLink);
+            // Genera un enlace para cada ciudad y agrégalo a la lista
+            const cityLink = document.createElement("li");
+            cityLink.innerHTML = `<a href="#${officialNameInSpanish.toLowerCase()}" onclick="showText('${officialNameInSpanish.toLowerCase()}')">${officialNameInSpanish}</a>`;
+            cityList.appendChild(cityLink);
+          });
         })
         .catch((error) => {
           console.error("Error al cargar el JSON:", error);
