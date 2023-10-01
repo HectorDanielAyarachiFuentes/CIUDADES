@@ -34,26 +34,30 @@
     document.addEventListener("DOMContentLoaded", function () {
       const cityList = document.getElementById("city-list");
       const cityContent = document.querySelector("section:last-child");
-
+    
       // URL del JSON (reemplaza con la ubicación real del JSON)
       const jsonURL = "independent.json"; // Asegúrate de que la ruta sea correcta
-
+    
       // Realiza una solicitud para cargar el JSON
       fetch(jsonURL)
         .then((response) => response.json())
         .then((data) => {
-          // Itera a través de los datos del JSON para generar enlaces
-          data.forEach((cityData) => {
-            const cityName = cityData.nombre;
-            const cityLink = document.createElement("li");
-            cityLink.innerHTML = `<a href="#${cityName.toLowerCase()}" onclick="showText('${cityName.toLowerCase()}')">${cityName}</a>`;
-            cityList.appendChild(cityLink);
-          });
+          // Obtén las traducciones en español desde "translations"
+          const translations = data[0].translations;
+    
+          // Itera a través de las traducciones para obtener el nombre en español
+          const officialNameInSpanish = translations.spa.official;
+    
+          // Genera el enlace
+          const cityLink = document.createElement("li");
+          cityLink.innerHTML = `<a href="#${officialNameInSpanish.toLowerCase()}" onclick="showText('${officialNameInSpanish.toLowerCase()}')">${officialNameInSpanish}</a>`;
+          cityList.appendChild(cityLink);
         })
         .catch((error) => {
           console.error("Error al cargar el JSON:", error);
         });
     });
+    
   </script>
 </body>
 </html>
