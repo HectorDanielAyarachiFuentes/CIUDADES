@@ -145,3 +145,28 @@ h2 {
   content: "🌍"; /* Agrega un icono de mapamundi antiguo */
   margin-right: 5px;
 }
+/* Estilos para el botón Volver atrás */
+.volver-btn {
+  background-color: #007bff; /* Color de fondo azul */
+  color: #fff; /* Color del texto blanco */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cursor de mano al pasar el ratón */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Cambiar el color del botón al pasar el ratón sobre él */
+.volver-btn:hover {
+  background-color: #0056b3; /* Color de fondo azul más oscuro */
+}
+
+/* Estilos para el enlace "CIUDADES" */
+.volver-link {
+  text-decoration: none; /* Sin subrayado */
+  font-size: 24px; /* Tamaño de fuente */
+}
+
+/* Cambiar el color del enlace al pasar el ratón sobre él */
+.volver-link:hover {
+  color: #007bff; /* Color azul al pasar el ratón */
+}

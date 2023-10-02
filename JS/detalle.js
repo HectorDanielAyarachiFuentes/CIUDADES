@@ -83,6 +83,8 @@ const cityHtml = `
 <li>Chino (Oficial): ${selectedCity.translations.zho.official}</li>
 <li>Chino (Común): ${selectedCity.translations.zho.common}</li>
 </ul>
+<button class="volver-btn" onclick="window.location.href='index.html'">Volver atrás</button>
+
       <!-- Agrega más detalles según sea necesario -->
     `;
     cityDetails.innerHTML = cityHtml;
