@@ -2,7 +2,6 @@
 * {
   box-sizing: border-box;
 }
-
 /* Establece la fuente predeterminada para el cuerpo */
 body {
   font-family: 'Times New Roman', Times, serif;
@@ -10,7 +9,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 /* Estilo para el encabezado */
 header {
   background-color: #8b4513; /* Color marrón */
@@ -19,7 +17,6 @@ header {
   font-size: 35px;
   color: #fff; /* Texto blanco */
 }
-
 /* Contenedor para los elementos flexibles */
 section {
   display: flex;
@@ -29,10 +26,7 @@ section {
   border: 1px solid #8b4513; /* Borde marrón */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-
 }
-
 /* Estilo para el menú de navegación */
 nav {
   flex: 1;
@@ -45,18 +39,15 @@ nav {
   border: 1px solid #8b4513; /* Borde marrón */
   border-radius: 10px;
 }
-
 /* Estilo para la lista dentro del menú */
 nav ul {
   list-style-type: none;
   padding: 0;
 }
-
 /* Estilo para los elementos de la lista */
 nav li {
   margin-bottom: 10px;
 }
-
 /* Estilo para los enlaces en la lista */
 nav a {
   text-decoration: none;
@@ -69,13 +60,11 @@ nav a {
   border-radius: 5px;
   background-color: #f0e6d2; /* Color de papel antiguo */
 }
-
 /* Cambiar el color del enlace y el fondo al pasar el ratón sobre él */
 nav a:hover {
   color: #fff; /* Texto blanco */
   background-color: #8b4513; /* Color marrón */
 }
-
 /* Estilo para el contenido */
 article {
   flex: 3;
@@ -83,7 +72,6 @@ article {
   padding: 20px;
   border-left: 1px solid #8b4513; /* Borde marrón */
 }
-
 /* Estilo para el pie de página */
 footer {
   background-color: #8b4513; /* Color marrón */
@@ -91,7 +79,6 @@ footer {
   text-align: center;
   color: #fff; /* Texto blanco */
 }
-
 /* Diseño responsivo: coloca el menú y el contenido uno encima del otro en pantallas pequeñas */
 @media (max-width: 600px) {
   section {
@@ -101,19 +88,16 @@ footer {
     margin: 20px;
   }
 }
-
 /* Estilo CSS para hacer las imágenes responsivas */
 img {
   max-width: 100%;
   height: auto;
 }
-
 /* Estilos CSS para centrar los encabezados h2 */
 h2 {
   text-align: center;
   margin-top: 0;
 }
-
 /* Estilo para el enlace "Volver a la página principal" */
 .volver-link {
   text-decoration: none;
@@ -123,13 +107,11 @@ h2 {
   border-radius: 5px;
   transition: background-color 0.3s;
 }
-
 /* Cambiar el color de fondo del enlace al pasar el ratón sobre él */
 .volver-link:hover {
   background-color: #fff; /* Texto blanco */
   color: #8b4513; /* Color marrón */
 }
-
 #city-details {
   display: flex;
   flex-direction: column;
@@ -138,13 +120,11 @@ h2 {
   text-align: center;
   min-height: 100vh; /* Para centrar verticalmente en la ventana */
 }
-
 #city-details p,
 #city-details img {
   /* Estilos adicionales para los elementos dentro del div */
   margin: 10px; /* Agrega un espacio entre elementos si es necesario */
 }
-
 #google-maps-link {
   text-decoration: none;
   background-color: #f0e6d2; /* Color de papel antiguo */
@@ -157,12 +137,10 @@ h2 {
   transition: background-color 0.3s, color 0.3s;
   display: inline-block;
 }
-
 #google-maps-link:hover {
   background-color: #8b4513; /* Color marrón */
   color: #fff; /* Texto blanco */
 }
-
 #google-maps-link::before {
   content: "🌍"; /* Agrega un icono de mapamundi antiguo */
   margin-right: 5px;
