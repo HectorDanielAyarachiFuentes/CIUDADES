@@ -8,7 +8,7 @@ function showText(id) {
         articleToShow.style.display = 'block'; // Muestra el elemento específico
     }
   }
-  //// MUSICA DE BABASONICOS PLAYER
+  //// MUSICA DE Hazme Una Señal de Roberto Jordan
 const audioPlayer = document.getElementById("audio-player");
 
 function playPause() {
