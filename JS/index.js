@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const cityList = document.getElementById("city-list");
   // URL del JSON (reemplaza con la ubicación real del JSON)
-  const jsonURL = "independent.json"; // Asegúrate de que la ruta sea correcta
+  const jsonURL = "./JSON/independent.json"; // Asegúrate de que la ruta sea correcta
   // Realiza una solicitud para cargar el JSON
   fetch(jsonURL)
     .then((response) => response.json())
