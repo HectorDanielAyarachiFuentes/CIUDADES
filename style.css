@@ -144,3 +144,26 @@ h2 {
   /* Estilos adicionales para los elementos dentro del div */
   margin: 10px; /* Agrega un espacio entre elementos si es necesario */
 }
+
+#google-maps-link {
+  text-decoration: none;
+  background-color: #f0e6d2; /* Color de papel antiguo */
+  color: #8b4513; /* Color marrón */
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #8b4513; /* Borde marrón */
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-block;
+}
+
+#google-maps-link:hover {
+  background-color: #8b4513; /* Color marrón */
+  color: #fff; /* Texto blanco */
+}
+
+#google-maps-link::before {
+  content: "🌍"; /* Agrega un icono de mapamundi antiguo */
+  margin-right: 5px;
+}

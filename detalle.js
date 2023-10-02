@@ -34,7 +34,7 @@ const cityHtml = `
 <li>Latitud: ${selectedCity.capitalInfo.latlng[0]}</li>
 <li>Longitud: ${selectedCity.capitalInfo.latlng[1]}</li>
 </ul>
-<a href="https://www.google.com/maps?q=${selectedCity.capitalInfo.latlng[0]},${selectedCity.capitalInfo.latlng[1]}" target="_blank">Ver en Google Maps</a>
+<a id="google-maps-link" href="https://www.google.com/maps?q=${selectedCity.capitalInfo.latlng[0]},${selectedCity.capitalInfo.latlng[1]}" target="_blank">Ver en Google Maps</a>
 
 
 
