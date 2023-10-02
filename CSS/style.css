@@ -170,3 +170,16 @@ h2 {
 .volver-link:hover {
   color: #007bff; /* Color azul al pasar el ratón */
 }
+/* Estilos para el botón "Guess" (id="guess-button") */
+#guess-button {
+  font-size: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transición suave de color */
+}
+#guess-button:hover {
+  background-color: #007bff; /* Cambia de color en hover */
+  color: white;
+}

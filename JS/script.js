@@ -8,3 +8,17 @@ function showText(id) {
         articleToShow.style.display = 'block'; // Muestra el elemento específico
     }
   }
+  //// MUSICA DE BABASONICOS PLAYER
+const audioPlayer = document.getElementById("audio-player");
+
+function playPause() {
+  if (audioPlayer.paused) {
+    audioPlayer.play();
+    document.getElementById("guess-button").innerHTML = "¡Dame una sonrisa! 🎶🤘";
+  } else {
+    audioPlayer.pause();
+    document.getElementById("guess-button").innerHTML = "Si tu me quieres...";
+  }
+}
+
+document.getElementById("guess-button").addEventListener("click", playPause);
