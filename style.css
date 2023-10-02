@@ -29,6 +29,8 @@ section {
   border: 1px solid #8b4513; /* Borde marrón */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
 }
 
 /* Estilo para el menú de navegación */
@@ -126,4 +128,19 @@ h2 {
 .volver-link:hover {
   background-color: #fff; /* Texto blanco */
   color: #8b4513; /* Color marrón */
+}
+
+#city-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh; /* Para centrar verticalmente en la ventana */
+}
+
+#city-details p,
+#city-details img {
+  /* Estilos adicionales para los elementos dentro del div */
+  margin: 10px; /* Agrega un espacio entre elementos si es necesario */
 }

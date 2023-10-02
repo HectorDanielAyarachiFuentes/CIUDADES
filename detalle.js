@@ -26,8 +26,8 @@ const cityHtml = `
 <img src="${selectedCity.flags.svg}" alt="${selectedCity.flags.alt}">
 <p>Descripción de la bandera:</p>
 <p>${selectedCity.flags.alt}</p>
-
-<p>Escudo de Armas: <img src="${selectedCity.coatOfArms.png}" alt="Escudo de Armas de la ciudad"></p>
+<p>Escudo de Armas:</p>
+ <img src="${selectedCity.coatOfArms.png}" alt="Escudo de Armas de la ciudad">
 <p>Inicio de la semana: ${selectedCity.startOfWeek}</p>
 <p>Coordenadas de la capital:</p>
 <ul>
