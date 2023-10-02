@@ -1,8 +1,9 @@
 # 🌍 **Descubriendo el Mundo: Ciudades y Países**
+Bienvenido a un emocionante viaje alrededor del mundo, explorando fascinantes ciudades y conociendo las características únicas de cada país. ¡Prepárate para una aventura inolvidable!
+
+![Panorama Total](https://github.com/HectorDanielAyarachiFuentes/CIUDADES/blob/main/Imagenes/mobile%20(1).gif?raw=true)
 
 ![Panorama Total](https://github.com/HectorDanielAyarachiFuentes/CIUDADES/blob/main/Imagenes/Opera%20Instant%C3%A1nea_2023-10-01_233135_hectordanielayarachifuentes.github.io.png?raw=true)
-
-Bienvenido a un emocionante viaje alrededor del mundo, explorando fascinantes ciudades y conociendo las características únicas de cada país. ¡Prepárate para una aventura inolvidable!
 
 ## **Conoce el País y sus Características**
 
