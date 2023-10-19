@@ -30,7 +30,8 @@ const cityHtml = `
 <li>Longitud: ${selectedCity.capitalInfo.latlng[1]}</li>
 </ul>
 <a id="google-maps-link" href="https://www.google.com/maps?q=${selectedCity.capitalInfo.latlng[0]},${selectedCity.capitalInfo.latlng[1]}" target="_blank">Ver en Google Maps</a>
-<p>Traducciones de Venezuela:</p>
+<p>Traducciones de ${selectedCity.translations.spa.common}</p>
+
 <ul>
 <li>Árabe (Oficial): ${selectedCity.translations.ara.official}</li>
 <li>Árabe (Común): ${selectedCity.translations.ara.common}</li>
