@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const listContainer = document.getElementById("city-list"); // Cambiamos el nombre para mayor claridad
+  const listContainer = document.getElementById("city-list");
   const jsonURL = "./JSON/independent.json";
 
   fetch(jsonURL)
@@ -10,29 +10,44 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then(data => {
-      // 1. Almacena los datos en localStorage para que 'detalle.js' los use.
+      // 1. Almacena los datos en localStorage. (Sin cambios)
       localStorage.setItem("datosciudad", JSON.stringify(data));
 
-      // 2. Objeto para agrupar los países por continente.
-      //    Ej: { "Europe": [...], "Asia": [...] }
+      // --- MEJORA 1: MAPA PARA TRADUCIR LOS CONTINENTES ---
+      const continentTranslations = {
+        "Africa": "África",
+        "Europe": "Europa",
+        "Asia": "Asia",
+        "Oceania": "Oceanía",
+        "North America": "América del Norte",
+        "South America": "América del Sur",
+        "Antarctica": "Antártida"
+      };
+
+      // 2. Objeto para agrupar los países por continente. (Sin cambios)
       const countriesByContinent = {};
 
       data.forEach(country => {
-        // Asumimos que el primer continente en la lista es el principal.
-        const continentName = country.continents[0]; 
+        // --- MEJORA 2: CÓDIGO MÁS ROBUSTO ---
+        // Usamos optional chaining (?.) para evitar errores si 'continents' no existe.
+        const continentName = country.continents?.[0]; 
+        
         if (continentName) {
-          // Si el continente no existe aún en nuestro objeto, lo creamos como un array vacío.
           if (!countriesByContinent[continentName]) {
             countriesByContinent[continentName] = [];
           }
-          // Añadimos el país actual al array de su continente.
           countriesByContinent[continentName].push(country);
         }
       });
 
-      // 3. Ordenar: primero los continentes alfabéticamente, y luego los países dentro de cada continente.
-      const sortedContinents = Object.keys(countriesByContinent).sort();
+      // 3. Ordenar: ahora ordenamos por el nombre TRADUCIDO del continente.
+      const sortedContinents = Object.keys(countriesByContinent).sort((a, b) => {
+        const translatedA = continentTranslations[a] || a;
+        const translatedB = continentTranslations[b] || b;
+        return translatedA.localeCompare(translatedB, 'es');
+      });
 
+      // Ordenar los países dentro de cada continente (sin cambios).
       sortedContinents.forEach(continent => {
         countriesByContinent[continent].sort((a, b) => {
           return a.translations.spa.common.localeCompare(b.translations.spa.common, 'es');
@@ -43,17 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
       listContainer.innerHTML = '';
       
       sortedContinents.forEach(continentName => {
-        // Crea un contenedor para el grupo del continente
         const continentGroup = document.createElement('div');
         continentGroup.className = 'continent-group';
 
-        // Crea el título del continente
         const title = document.createElement('h2');
         title.className = 'continent-title';
-        title.textContent = continentName;
+        // Usamos nuestro mapa de traducciones. Si no encuentra traducción, usa el nombre original.
+        title.textContent = continentTranslations[continentName] || continentName;
         continentGroup.appendChild(title);
 
-        // Crea la lista de países para este continente
         const countrySublist = document.createElement('ul');
         countrySublist.className = 'country-sublist';
 
@@ -66,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
         continentGroup.appendChild(countrySublist);
         listContainer.appendChild(continentGroup);
       });
-
     })
     .catch(error => {
       console.error("Error en el proceso de carga:", error);

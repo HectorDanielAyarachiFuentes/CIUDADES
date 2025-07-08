@@ -2,11 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- 1. OBTENER DATOS Y EL PAÍS SELECCIONADO ---
   const countryId = window.location.hash.substring(1);
   const allCountriesData = JSON.parse(localStorage.getItem("datosciudad"));
-  
-  // Nota: Tu lógica busca por un 'generatedId' que no está en el JSON.
-  // Asumiré que el ID en la URL (#VE) corresponde al código 'cca2' o 'cca3' del país.
-  // Esto es más robusto. Si usas un ID aleatorio, la lógica de búsqueda debe ajustarse.
-  // Vamos a buscar por cca3 (ej. "VEN") o cca2 (ej. "VE").
+
   const selectedCountry = allCountriesData.find(
     (country) => country.cca3 === countryId.toUpperCase() || country.cca2 === countryId.toUpperCase()
   );
@@ -16,28 +12,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- 2. VERIFICAR SI SE ENCONTRÓ EL PAÍS ---
   if (selectedCountry) {
     // --- 3. PREPARAR LOS DATOS (CON VALORES POR DEFECTO PARA EVITAR ERRORES) ---
-    // Esto hace el código más seguro si algún dato falta en el JSON.
     const countryName = selectedCountry.translations.spa?.common ?? selectedCountry.name.common;
     const officialName = selectedCountry.translations.spa?.official ?? selectedCountry.name.official;
     const capital = selectedCountry.capital?.join(', ') ?? 'No especificada';
-    const population = selectedCountry.population.toLocaleString('es-ES'); // Formato español (1.234.567)
+    const population = selectedCountry.population.toLocaleString('es-ES');
     const area = selectedCountry.area.toLocaleString('es-ES') + ' km²';
     const continents = selectedCountry.continents?.join(', ') ?? 'No especificado';
     const subregion = selectedCountry.subregion ?? 'No especificada';
 
-    // Moneda (un poco más complejo porque es un objeto)
     const currencyKey = Object.keys(selectedCountry.currencies)[0];
-    const currency = currencyKey 
+    const currency = currencyKey
       ? `${selectedCountry.currencies[currencyKey].name} (${selectedCountry.currencies[currencyKey].symbol})`
       : 'No especificada';
 
-    // Idiomas (también un objeto)
     const languages = Object.values(selectedCountry.languages)?.join(', ') ?? 'No especificado';
-    
-    // Demónimo en español, si no, en inglés
     const demonym = selectedCountry.demonyms.spa?.m ?? selectedCountry.demonyms.eng?.m ?? 'No especificado';
-
-    // Vecinos (obtenemos los códigos)
     const borders = selectedCountry.borders?.join(', ') ?? 'No tiene fronteras terrestres';
 
     // --- 4. MAPA DE NOMBRES DE IDIOMAS PARA LAS TRADUCCIONES ---
@@ -85,12 +74,16 @@ document.addEventListener("DOMContentLoaded", function () {
           ` : ''}
         </div>
         
-        <h2 class="section-title">Geografía y Ubicación</h2>
-        <div class="details-grid">
-            <div class="grid-item"><strong>Fronteras</strong><span>${borders}</span></div>
-            <div class="grid-item"><strong>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
+        <!-- INICIO DE LA SECCIÓN CORREGIDA -->
+        <div class="geography-section">
+          <h2 class="section-title">Geografía y Ubicación</h2>
+          <div class="details-grid">
+              <div class="grid-item"><strong>Fronteras</strong><span>${borders}</span></div>
+              <div class="grid-item"><strong>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
+          </div>
+          <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank">Ver en Google Maps</a>
         </div>
-        <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank">Ver en Google Maps</a>
+        <!-- FIN DE LA SECCIÓN CORREGIDA -->
 
         <h2 class="section-title">Nombres en otros idiomas</h2>
         <ul class="translations-list">
