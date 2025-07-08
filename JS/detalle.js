@@ -1,96 +1,118 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Obtén la ID de la ciudad desde la URL
-  const cityId = window.location.hash.substring(1); // Elimina el "#" del fragmento de la URL
-  // Obtén los IDs generados aleatoriamente desde localStorage
-  const generatedIds = JSON.parse(localStorage.getItem("generatedIds"));
-  // Obtén los datos de ciudades desde localStorage
-  const cityData = JSON.parse(localStorage.getItem("datosciudad"));
-  // Busca la ciudad correspondiente por la ID generada aleatoriamente
-  const selectedCity = cityData.find((city, index) => generatedIds[index] === cityId);
-  // Verifica si se encontró la ciudad
-  if (selectedCity) {
-    // Muestra los detalles de la ciudad
-const cityDetails = document.getElementById("city-details");
-const population = selectedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-const cityHtml = `
-<h1>${selectedCity.translations.spa.common}</h1>
-<p>Capital: ${selectedCity.capital[0]}</p>
-<p>Población: ${population}</p>
-<p>Continente: ${selectedCity.continents}</p>
-<p>Bandera:</p>
-<img src="${selectedCity.flags.svg}" alt="${selectedCity.flags.alt}">
-<p>Descripción de la bandera:</p>
-<p>${selectedCity.flags.alt}</p>
-<p>Escudo de Armas:</p>
- <img src="${selectedCity.coatOfArms.png}" alt="Escudo de Armas de la ciudad">
-<p>Inicio de la semana: ${selectedCity.startOfWeek}</p>
-<p>Coordenadas de la capital:</p>
-<ul>
-<li>Latitud: ${selectedCity.capitalInfo.latlng[0]}</li>
-<li>Longitud: ${selectedCity.capitalInfo.latlng[1]}</li>
-</ul>
-<a id="google-maps-link" href="https://www.google.com/maps?q=${selectedCity.capitalInfo.latlng[0]},${selectedCity.capitalInfo.latlng[1]}" target="_blank">Ver en Google Maps</a>
-<p>Traducciones de ${selectedCity.translations.spa.common}</p>
+  // --- 1. OBTENER DATOS Y EL PAÍS SELECCIONADO ---
+  const countryId = window.location.hash.substring(1);
+  const allCountriesData = JSON.parse(localStorage.getItem("datosciudad"));
+  
+  // Nota: Tu lógica busca por un 'generatedId' que no está en el JSON.
+  // Asumiré que el ID en la URL (#VE) corresponde al código 'cca2' o 'cca3' del país.
+  // Esto es más robusto. Si usas un ID aleatorio, la lógica de búsqueda debe ajustarse.
+  // Vamos a buscar por cca3 (ej. "VEN") o cca2 (ej. "VE").
+  const selectedCountry = allCountriesData.find(
+    (country) => country.cca3 === countryId.toUpperCase() || country.cca2 === countryId.toUpperCase()
+  );
 
-<ul>
-<li>Árabe (Oficial): ${selectedCity.translations.ara.official}</li>
-<li>Árabe (Común): ${selectedCity.translations.ara.common}</li>
-<li>Bretón (Oficial): ${selectedCity.translations.bre.official}</li>
-<li>Bretón (Común): ${selectedCity.translations.bre.common}</li>
-<li>Checo (Oficial): ${selectedCity.translations.ces.official}</li>
-<li>Checo (Común): ${selectedCity.translations.ces.common}</li>
-<li>Galés (Oficial): ${selectedCity.translations.cym.official}</li>
-<li>Galés (Común): ${selectedCity.translations.cym.common}</li>
-<li>Alemán (Oficial): ${selectedCity.translations.deu.official}</li>
-<li>Alemán (Común): ${selectedCity.translations.deu.common}</li>
-<li>Estonio (Oficial): ${selectedCity.translations.est.official}</li>
-<li>Estonio (Común): ${selectedCity.translations.est.common}</li>
-<li>Finlandés (Oficial): ${selectedCity.translations.fin.official}</li>
-<li>Finlandés (Común): ${selectedCity.translations.fin.common}</li>
-<li>Francés (Oficial): ${selectedCity.translations.fra.official}</li>
-<li>Francés (Común): ${selectedCity.translations.fra.common}</li>
-<li>Croata (Oficial): ${selectedCity.translations.hrv.official}</li>
-<li>Croata (Común): ${selectedCity.translations.hrv.common}</li>
-<li>Húngaro (Oficial): ${selectedCity.translations.hun.official}</li>
-<li>Húngaro (Común): ${selectedCity.translations.hun.common}</li>
-<li>Italiano (Oficial): ${selectedCity.translations.ita.official}</li>
-<li>Italiano (Común): ${selectedCity.translations.ita.common}</li>
-<li>Japonés (Oficial): ${selectedCity.translations.jpn.official}</li>
-<li>Japonés (Común): ${selectedCity.translations.jpn.common}</li>
-<li>Coreano (Oficial): ${selectedCity.translations.kor.official}</li>
-<li>Coreano (Común): ${selectedCity.translations.kor.common}</li>
-<li>Holandés (Oficial): ${selectedCity.translations.nld.official}</li>
-<li>Holandés (Común): ${selectedCity.translations.nld.common}</li>
-<li>Persa (Oficial): ${selectedCity.translations.per.official}</li>
-<li>Persa (Común): ${selectedCity.translations.per.common}</li>
-<li>Polaco (Oficial): ${selectedCity.translations.pol.official}</li>
-<li>Polaco (Común): ${selectedCity.translations.pol.common}</li>
-<li>Portugués (Oficial): ${selectedCity.translations.por.official}</li>
-<li>Portugués (Común): ${selectedCity.translations.por.common}</li>
-<li>Ruso (Oficial): ${selectedCity.translations.rus.official}</li>
-<li>Ruso (Común): ${selectedCity.translations.rus.common}</li>
-<li>Eslovaco (Oficial): ${selectedCity.translations.slk.official}</li>
-<li>Eslovaco (Común): ${selectedCity.translations.slk.common}</li>
-<li>Español (Oficial): ${selectedCity.translations.spa.official}</li>
-<li>Español (Común): ${selectedCity.translations.spa.common}</li>
-<li>Serbio (Oficial): ${selectedCity.translations.srp.official}</li>
-<li>Serbio (Común): ${selectedCity.translations.srp.common}</li>
-<li>Sueco (Oficial): ${selectedCity.translations.swe.official}</li>
-<li>Sueco (Común): ${selectedCity.translations.swe.common}</li>
-<li>Turco (Oficial): ${selectedCity.translations.tur.official}</li>
-<li>Turco (Común): ${selectedCity.translations.tur.common}</li>
-<li>Urdu (Oficial): ${selectedCity.translations.urd.official}</li>
-<li>Urdu (Común): ${selectedCity.translations.urd.common}</li>
-<li>Chino (Oficial): ${selectedCity.translations.zho.official}</li>
-<li>Chino (Común): ${selectedCity.translations.zho.common}</li>
-</ul>
-<button class="volver-btn" onclick="window.location.href='index.html'">Volver atrás</button>
+  const cityDetailsContainer = document.getElementById("city-details");
 
-      <!-- Agrega más detalles según sea necesario -->
+  // --- 2. VERIFICAR SI SE ENCONTRÓ EL PAÍS ---
+  if (selectedCountry) {
+    // --- 3. PREPARAR LOS DATOS (CON VALORES POR DEFECTO PARA EVITAR ERRORES) ---
+    // Esto hace el código más seguro si algún dato falta en el JSON.
+    const countryName = selectedCountry.translations.spa?.common ?? selectedCountry.name.common;
+    const officialName = selectedCountry.translations.spa?.official ?? selectedCountry.name.official;
+    const capital = selectedCountry.capital?.join(', ') ?? 'No especificada';
+    const population = selectedCountry.population.toLocaleString('es-ES'); // Formato español (1.234.567)
+    const area = selectedCountry.area.toLocaleString('es-ES') + ' km²';
+    const continents = selectedCountry.continents?.join(', ') ?? 'No especificado';
+    const subregion = selectedCountry.subregion ?? 'No especificada';
+
+    // Moneda (un poco más complejo porque es un objeto)
+    const currencyKey = Object.keys(selectedCountry.currencies)[0];
+    const currency = currencyKey 
+      ? `${selectedCountry.currencies[currencyKey].name} (${selectedCountry.currencies[currencyKey].symbol})`
+      : 'No especificada';
+
+    // Idiomas (también un objeto)
+    const languages = Object.values(selectedCountry.languages)?.join(', ') ?? 'No especificado';
+    
+    // Demónimo en español, si no, en inglés
+    const demonym = selectedCountry.demonyms.spa?.m ?? selectedCountry.demonyms.eng?.m ?? 'No especificado';
+
+    // Vecinos (obtenemos los códigos)
+    const borders = selectedCountry.borders?.join(', ') ?? 'No tiene fronteras terrestres';
+
+    // --- 4. MAPA DE NOMBRES DE IDIOMAS PARA LAS TRADUCCIONES ---
+    const languageNames = {
+      ara: 'Árabe', bre: 'Bretón', ces: 'Checo', cym: 'Galés', deu: 'Alemán',
+      est: 'Estonio', fin: 'Finlandés', fra: 'Francés', hrv: 'Croata', hun: 'Húngaro',
+      ita: 'Italiano', jpn: 'Japonés', kor: 'Coreano', nld: 'Holandés', per: 'Persa',
+      pol: 'Polaco', por: 'Portugués', rus: 'Ruso', slk: 'Eslovaco', spa: 'Español',
+      srp: 'Serbio', swe: 'Sueco', tur: 'Turco', urd: 'Urdu', zho: 'Chino'
+    };
+
+    // --- 5. GENERAR EL HTML DINÁMICAMENTE ---
+    const countryHtml = `
+      <div class="country-details-container">
+        
+        <div class="country-header">
+          <h1>${countryName} ${selectedCountry.flag}</h1>
+          <p class="official-name">${officialName}</p>
+        </div>
+
+        <h2 class="section-title">Datos Generales</h2>
+        <div class="details-grid">
+          <div class="grid-item"><strong>Capital</strong><span>${capital}</span></div>
+          <div class="grid-item"><strong>Población</strong><span>${population}</span></div>
+          <div class="grid-item"><strong>Área</strong><span>${area}</span></div>
+          <div class="grid-item"><strong>Continente</strong><span>${continents}</span></div>
+          <div class="grid-item"><strong>Subregión</strong><span>${subregion}</span></div>
+          <div class="grid-item"><strong>Moneda</strong><span>${currency}</span></div>
+          <div class="grid-item"><strong>Idiomas</strong><span>${languages}</span></div>
+          <div class="grid-item"><strong>Gentilicio</strong><span>${demonym}</span></div>
+        </div>
+
+        <h2 class="section-title">Símbolos Nacionales</h2>
+        <div class="symbols-container">
+          <div class="symbol-item">
+            <h3>Bandera</h3>
+            <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt}" class="country-flag">
+            <p>${selectedCountry.flags.alt ?? 'Descripción no disponible.'}</p>
+          </div>
+          ${selectedCountry.coatOfArms.png ? `
+          <div class="symbol-item">
+            <h3>Escudo de Armas</h3>
+            <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms">
+          </div>
+          ` : ''}
+        </div>
+        
+        <h2 class="section-title">Geografía y Ubicación</h2>
+        <div class="details-grid">
+            <div class="grid-item"><strong>Fronteras</strong><span>${borders}</span></div>
+            <div class="grid-item"><strong>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
+        </div>
+        <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank">Ver en Google Maps</a>
+
+        <h2 class="section-title">Nombres en otros idiomas</h2>
+        <ul class="translations-list">
+          ${Object.entries(selectedCountry.translations).map(([key, value]) => `
+            <li><strong>${languageNames[key] || key}:</strong> ${value.common}</li>
+          `).join('')}
+        </ul>
+
+      </div>
     `;
-    cityDetails.innerHTML = cityHtml;
+
+    cityDetailsContainer.innerHTML = countryHtml;
+
   } else {
-    // Maneja el caso en el que la ciudad no se encuentra
-    console.error("Ciudad no encontrada.");
+    // --- MANEJO DE ERROR SI EL PAÍS NO SE ENCUENTRA ---
+    cityDetailsContainer.innerHTML = `
+      <div class="error-container">
+        <h1>Error 404</h1>
+        <p>No se pudo encontrar el país con el ID "${countryId}".</p>
+        <p>Por favor, vuelve a la página principal e inténtalo de nuevo.</p>
+        <a href="index.html" class="back-button">Volver al Inicio</a>
+      </div>
+    `;
   }
 });
