@@ -1,22 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // --- 1. OBTENER DATOS Y EL PAÍS SELECCIONADO ---
+  // --- 1. OBTENER ID DEL PAÍS Y CONTENEDOR ---
   const countryId = window.location.hash.substring(1);
-  const allCountriesData = JSON.parse(localStorage.getItem("datosciudad"));
-
-  const selectedCountry = allCountriesData.find(
-    (country) => country.cca3 === countryId.toUpperCase() || country.cca2 === countryId.toUpperCase()
-  );
-
   const cityDetailsContainer = document.getElementById("city-details");
+  const jsonURL = "./JSON/independent.json";
 
-  // --- 2. VERIFICAR SI SE ENCONTRÓ EL PAÍS ---
-  if (selectedCountry) {
-    // --- 3. PREPARAR LOS DATOS (CON VALORES POR DEFECTO PARA EVITAR ERRORES) ---
+  // --- 2. FUNCIÓN PARA RENDERIZAR LOS DETALLES DEL PAÍS ---
+  function renderCountryDetails(selectedCountry) {
+    // --- PREPARAR LOS DATOS (CON VALORES POR DEFECTO PARA EVITAR ERRORES) ---
     const countryName = selectedCountry.translations.spa?.common ?? selectedCountry.name.common;
     const officialName = selectedCountry.translations.spa?.official ?? selectedCountry.name.official;
     const capital = selectedCountry.capital?.join(', ') ?? 'No especificada';
     const population = selectedCountry.population.toLocaleString('es-ES');
-    const area = selectedCountry.area.toLocaleString('es-ES') + ' km²';
+    const area = (selectedCountry.area ?? 0).toLocaleString('es-ES') + ' km²';
     const continents = selectedCountry.continents?.join(', ') ?? 'No especificado';
     const subregion = selectedCountry.subregion ?? 'No especificada';
 
@@ -29,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const demonym = selectedCountry.demonyms.spa?.m ?? selectedCountry.demonyms.eng?.m ?? 'No especificado';
     const borders = selectedCountry.borders?.join(', ') ?? 'No tiene fronteras terrestres';
 
-    // --- 4. MAPA DE NOMBRES DE IDIOMAS PARA LAS TRADUCCIONES ---
+    // --- MAPA DE NOMBRES DE IDIOMAS PARA LAS TRADUCCIONES ---
     const languageNames = {
       ara: 'Árabe', bre: 'Bretón', ces: 'Checo', cym: 'Galés', deu: 'Alemán',
       est: 'Estonio', fin: 'Finlandés', fra: 'Francés', hrv: 'Croata', hun: 'Húngaro',
@@ -38,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       srp: 'Serbio', swe: 'Sueco', tur: 'Turco', urd: 'Urdu', zho: 'Chino'
     };
 
-    // --- 5. GENERAR EL HTML DINÁMICAMENTE ---
+    // --- GENERAR EL HTML DINÁMICAMENTE ---
     const countryHtml = `
       <div class="country-details-container">
         
@@ -96,16 +91,41 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     cityDetailsContainer.innerHTML = countryHtml;
+  }
 
-  } else {
-    // --- MANEJO DE ERROR SI EL PAÍS NO SE ENCUENTRA ---
+  // --- 3. FUNCIÓN PARA MOSTRAR UN ERROR ---
+  function renderError(message) {
     cityDetailsContainer.innerHTML = `
       <div class="error-container">
         <h1>Error 404</h1>
-        <p>No se pudo encontrar el país con el ID "${countryId}".</p>
+        <p>${message}</p>
         <p>Por favor, vuelve a la página principal e inténtalo de nuevo.</p>
         <a href="index.html" class="back-button">Volver al Inicio</a>
       </div>
     `;
   }
+
+  // --- 4. OBTENER DATOS Y RENDERIZAR ---
+  fetch(jsonURL)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error al cargar el JSON: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(allCountriesData => {
+      const selectedCountry = allCountriesData.find(
+        (country) => country.cca3 === countryId.toUpperCase() || country.cca2 === countryId.toUpperCase()
+      );
+
+      if (selectedCountry) {
+        renderCountryDetails(selectedCountry);
+      } else {
+        renderError(`No se pudo encontrar el país con el ID "${countryId}".`);
+      }
+    })
+    .catch(error => {
+      console.error("Error en el proceso de carga de detalles:", error);
+      renderError("No se pudieron cargar los datos del país.");
+    });
 });

@@ -10,9 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then(data => {
-      // 1. Almacena los datos en localStorage. (Sin cambios)
-      localStorage.setItem("datosciudad", JSON.stringify(data));
-
       // --- MEJORA 1: MAPA PARA TRADUCIR LOS CONTINENTES ---
       const continentTranslations = {
         "Africa": "África",
