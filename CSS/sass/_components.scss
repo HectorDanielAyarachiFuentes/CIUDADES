@@ -34,9 +34,9 @@
   transition: all $transition-speed ease;
 
   &:hover, &:focus {
-    background-image: linear-gradient(45deg, lighten($color-accent, 10%), $color-accent);
+    background-image: linear-gradient(45deg, $color-accent-light, $color-accent);
     color: $color-text-light;
-    box-shadow: 0 4px 10px rgba(200, 155, 79, 0.4);
+    box-shadow: 0 4px 10px $color-accent-shadow;
     transform: translateY(-3px);
     border-color: transparent;
   }
@@ -135,13 +135,13 @@
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba($color-primary, 0.5);
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.5);
   }
   70% {
-    box-shadow: 0 0 0 12px rgba($color-primary, 0);
+    box-shadow: 0 0 0 12px rgba(var(--color-primary-rgb), 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba($color-primary, 0);
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0);
   }
 }
 
