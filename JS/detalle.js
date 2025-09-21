@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="neighbors-grid">
           ${neighborsData.map(neighbor => `
             <a href="detalle.html#${neighbor.cca3}" class="country-card neighbor-card">
-              <img src="${neighbor.flags.svg}" alt="Bandera de ${neighbor.translations.spa.common}" loading="lazy" class="country-card-flag">
+            <img src="${neighbor.flags.svg}" alt="Bandera de ${neighbor.translations.spa.common}" loading="lazy" decoding="async" width="60" height="40" class="country-card-flag">
               <span class="country-card-name">${neighbor.translations.spa.common}</span>
             </a>
           `).join('')}
@@ -85,13 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="symbols-container">
             <div class="symbol-item">
               <h3>Bandera</h3>
-              <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt}" class="country-flag">
+              <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt ?? ''}" class="country-flag" loading="lazy" decoding="async" width="300" height="200">
               <p>${selectedCountry.flags.alt ?? 'Descripción no disponible.'}</p>
             </div>
             ${selectedCountry.coatOfArms.png ? `
             <div class="symbol-item">
               <h3>Escudo de Armas</h3>
-              <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms">
+              <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms" loading="lazy" decoding="async" width="200" height="200">
             </div>
             ` : ''}
           </div>
