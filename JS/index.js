@@ -2,6 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const listContainer = document.getElementById("city-list");
   const jsonURL = "./JSON/independent.json";
 
+  // --- MOSTRAR ANIMACIÓN DE CARGA ---
+  listContainer.innerHTML = `
+    <div class="loader-container">
+      <div class="loader"></div>
+      <p>Cargando países...</p>
+    </div>
+  `;
+
   fetch(jsonURL)
     .then(response => {
       if (!response.ok) {

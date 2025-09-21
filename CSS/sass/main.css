@@ -146,6 +146,37 @@ section {
   background-color: #65320d;
 }
 
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  gap: 1.5rem;
+  min-height: 300px;
+}
+.loader-container .loader {
+  border: 8px solid #e0d2b6;
+  border-top: 8px solid #8b4513;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
+}
+.loader-container p {
+  font-family: "Garamond", "Georgia", serif;
+  color: #65320d;
+  font-size: 1.2rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 nav {
   background: #fbf1d3;
   padding: 2rem;

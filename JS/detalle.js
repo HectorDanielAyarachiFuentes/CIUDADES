@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const cityDetailsContainer = document.getElementById("city-details");
   const jsonURL = "./JSON/independent.json";
 
+  // --- MOSTRAR ANIMACIÓN DE CARGA ---
+  cityDetailsContainer.innerHTML = `
+    <div class="loader-container">
+      <div class="loader"></div>
+      <p>Cargando detalles del país...</p>
+    </div>
+  `;
+
   // --- 2. FUNCIÓN PARA RENDERIZAR LOS DETALLES DEL PAÍS ---
   function renderCountryDetails(selectedCountry) {
     // --- PREPARAR LOS DATOS (CON VALORES POR DEFECTO PARA EVITAR ERRORES) ---

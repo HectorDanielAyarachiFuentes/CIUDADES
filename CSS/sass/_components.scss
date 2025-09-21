@@ -100,3 +100,34 @@
     }
   }
 }
+
+// Estilos para la animación de carga
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: calc($spacing-unit * 4);
+  gap: calc($spacing-unit * 1.5);
+  min-height: 300px;
+
+  .loader {
+    border: 8px solid $color-border;
+    border-top: 8px solid $color-primary;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+  }
+
+  p {
+    font-family: $font-heading;
+    color: $color-primary-dark;
+    font-size: 1.2rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
