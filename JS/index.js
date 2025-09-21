@@ -77,7 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         countriesByContinent[continentName].forEach(country => {
           const listItem = document.createElement('li');
-          listItem.innerHTML = `<a href="detalle.html#${country.cca3}">${country.translations.spa.common}</a>`;
+          const flagAltText = country.flags.alt || `Bandera de ${country.translations.spa.common}`;
+          listItem.innerHTML = `
+            <a href="detalle.html#${country.cca3}" class="country-card">
+              <img src="${country.flags.svg}" alt="${flagAltText}" loading="lazy" class="country-card-flag">
+              <span class="country-card-name">${country.translations.spa.common}</span>
+            </a>`;
           countrySublist.appendChild(listItem);
         });
 

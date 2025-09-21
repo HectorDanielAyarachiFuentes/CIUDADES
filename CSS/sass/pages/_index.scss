@@ -16,6 +16,11 @@ nav {
   gap: calc($spacing-unit * 2.5);
 }
 
+.error-message {
+  color: $color-primary-dark;
+  font-size: 1.2rem;
+}
+
 .continent-group {
   .continent-title {
     font-family: $font-heading;
@@ -34,29 +39,12 @@ nav {
   .country-sublist {
     list-style-type: none;
     padding: 0;
-    column-count: 3;
-    column-gap: calc($spacing-unit * 2);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: $spacing-unit * 1.5;
 
-    @media (max-width: 768px) {
-      column-count: 2;
-    }
-    @media (max-width: 480px) {
-      column-count: 1;
-    }
-
-    li a {
-      display: block;
-      text-decoration: none;
-      color: $color-text;
-      padding: 0.5rem;
-      border-radius: 6px;
-      transition: all $transition-speed ease;
-
-      &:hover, &:focus {
-        color: $color-text-light;
-        background-color: $color-primary;
-        transform: translateX(4px);
-      }
+    li {
+      list-style: none;
     }
   }
 }

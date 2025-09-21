@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   `;
 
   // --- 2. FUNCIÓN PARA RENDERIZAR LOS DETALLES DEL PAÍS ---
-  function renderCountryDetails(selectedCountry) {
+  function renderCountryDetails(selectedCountry, neighborsData) {
     // --- PREPARAR LOS DATOS (CON VALORES POR DEFECTO PARA EVITAR ERRORES) ---
     const countryName = selectedCountry.translations.spa?.common ?? selectedCountry.name.common;
     const officialName = selectedCountry.translations.spa?.official ?? selectedCountry.name.official;
@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const languages = Object.values(selectedCountry.languages)?.join(', ') ?? 'No especificado';
     const demonym = selectedCountry.demonyms.spa?.m ?? selectedCountry.demonyms.eng?.m ?? 'No especificado';
-    const borders = selectedCountry.borders?.join(', ') ?? 'No tiene fronteras terrestres';
+    const borderNames = (neighborsData && neighborsData.length > 0)
+      ? neighborsData.map(n => n.translations.spa.common).join(', ')
+      : 'No tiene fronteras terrestres';
 
     // --- MAPA DE NOMBRES DE IDIOMAS PARA LAS TRADUCCIONES ---
     const languageNames = {
@@ -41,25 +43,37 @@ document.addEventListener("DOMContentLoaded", function () {
       srp: 'Serbio', swe: 'Sueco', tur: 'Turco', urd: 'Urdu', zho: 'Chino'
     };
 
+    // --- GENERAR HTML PARA PAÍSES VECINOS ---
+    const neighborsHtml = (neighborsData && neighborsData.length > 0) ? `
+      <h2 class="section-title">Países Vecinos</h2>
+      <div class="neighbors-grid">
+        ${neighborsData.map(neighbor => `
+          <a href="detalle.html#${neighbor.cca3}" class="country-card neighbor-card">
+            <img src="${neighbor.flags.svg}" alt="Bandera de ${neighbor.translations.spa.common}" loading="lazy" class="country-card-flag">
+            <span class="country-card-name">${neighbor.translations.spa.common}</span>
+          </a>
+        `).join('')}
+      </div>
+    ` : '';
+
     // --- GENERAR EL HTML DINÁMICAMENTE ---
     const countryHtml = `
-      <div class="country-details-container">
-        
-        <div class="country-header">
-          <h1>${countryName} ${selectedCountry.flag}</h1>
-          <p class="official-name">${officialName}</p>
-        </div>
+      <div class="country-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${selectedCountry.flags.svg}')">
+        <h1>${countryName} ${selectedCountry.flag}</h1>
+        <p class="official-name">${officialName}</p>
+      </div>
 
+      <div class="country-details-container">
         <h2 class="section-title">Datos Generales</h2>
         <div class="details-grid">
-          <div class="grid-item"><strong>Capital</strong><span>${capital}</span></div>
-          <div class="grid-item"><strong>Población</strong><span>${population}</span></div>
-          <div class="grid-item"><strong>Área</strong><span>${area}</span></div>
-          <div class="grid-item"><strong>Continente</strong><span>${continents}</span></div>
-          <div class="grid-item"><strong>Subregión</strong><span>${subregion}</span></div>
-          <div class="grid-item"><strong>Moneda</strong><span>${currency}</span></div>
-          <div class="grid-item"><strong>Idiomas</strong><span>${languages}</span></div>
-          <div class="grid-item"><strong>Gentilicio</strong><span>${demonym}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">🏙️</span>Capital</strong><span>${capital}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">👨‍👩‍👧‍👦</span>Población</strong><span>${population}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">🏞️</span>Área</strong><span>${area}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">🌎</span>Continente</strong><span>${continents}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">📍</span>Subregión</strong><span>${subregion}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">💰</span>Moneda</strong><span>${currency}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">🗣️</span>Idiomas</strong><span>${languages}</span></div>
+          <div class="grid-item"><strong><span class="grid-item-icon">👋</span>Gentilicio</strong><span>${demonym}</span></div>
         </div>
 
         <h2 class="section-title">Símbolos Nacionales</h2>
@@ -81,19 +95,24 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="geography-section">
           <h2 class="section-title">Geografía y Ubicación</h2>
           <div class="details-grid">
-              <div class="grid-item"><strong>Fronteras</strong><span>${borders}</span></div>
-              <div class="grid-item"><strong>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
+              <div class="grid-item"><strong><span class="grid-item-icon">🗺️</span>Fronteras</strong><span>${borderNames}</span></div>
+              <div class="grid-item"><strong><span class="grid-item-icon">🧭</span>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
           </div>
           <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank">Ver en Google Maps</a>
         </div>
         <!-- FIN DE LA SECCIÓN CORREGIDA -->
 
+        ${neighborsHtml}
+
         <h2 class="section-title">Nombres en otros idiomas</h2>
-        <ul class="translations-list">
+        <div class="translations-grid">
           ${Object.entries(selectedCountry.translations).map(([key, value]) => `
-            <li><strong>${languageNames[key] || key}:</strong> ${value.common}</li>
+            <div class="translation-card">
+              <div class="translation-lang">${languageNames[key] || key.toUpperCase()}</div>
+              <div class="translation-name">${value.common}</div>
+            </div>
           `).join('')}
-        </ul>
+        </div>
 
       </div>
     `;
@@ -127,7 +146,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       if (selectedCountry) {
-        renderCountryDetails(selectedCountry);
+        const neighborsData = selectedCountry.borders
+          ?.map(borderCode => allCountriesData.find(country => country.cca3 === borderCode))
+          .filter(Boolean); // Filtra resultados nulos si un código de frontera no se encuentra
+
+        renderCountryDetails(selectedCountry, neighborsData);
       } else {
         renderError(`No se pudo encontrar el país con el ID "${countryId}".`);
       }

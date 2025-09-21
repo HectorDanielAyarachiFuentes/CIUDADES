@@ -177,6 +177,53 @@ section {
     transform: rotate(360deg);
   }
 }
+.country-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: #3d2b1f;
+  background-color: #fdf6e3;
+  border-radius: 8px;
+  border: 1px solid #e0d2b6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  height: 100%;
+}
+.country-card:hover, .country-card:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: #65320d;
+  border-color: #c89b4f;
+}
+.country-card .country-card-flag {
+  width: 100%;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e0d2b6;
+}
+.country-card .country-card-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.neighbor-card {
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+.neighbor-card .country-card-flag {
+  height: 40px;
+}
+.neighbor-card .country-card-name {
+  font-size: 0.8rem;
+}
+
 nav {
   background: #fbf1d3;
   padding: 2rem;
@@ -196,6 +243,11 @@ nav {
   gap: 2.5rem;
 }
 
+.error-message {
+  color: #65320d;
+  font-size: 1.2rem;
+}
+
 .continent-group .continent-title {
   font-family: "Garamond", "Georgia", serif;
   font-size: 2rem;
@@ -213,35 +265,43 @@ nav {
 .continent-group .country-sublist {
   list-style-type: none;
   padding: 0;
-  -moz-column-count: 3;
-       column-count: 3;
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+.continent-group .country-sublist li {
+  list-style: none;
+}
+
+.country-hero {
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #fffcf2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.country-hero h1 {
+  font-family: "Garamond", "Georgia", serif;
+  font-size: 3rem;
+  color: #fffcf2;
 }
 @media (max-width: 768px) {
-  .continent-group .country-sublist {
-    -moz-column-count: 2;
-         column-count: 2;
+  .country-hero h1 {
+    font-size: 2.5rem;
   }
 }
 @media (max-width: 480px) {
-  .continent-group .country-sublist {
-    -moz-column-count: 1;
-         column-count: 1;
+  .country-hero h1 {
+    font-size: 2rem;
   }
 }
-.continent-group .country-sublist li a {
-  display: block;
-  text-decoration: none;
-  color: #3d2b1f;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-.continent-group .country-sublist li a:hover, .continent-group .country-sublist li a:focus {
-  color: #fffcf2;
-  background-color: #8b4513;
-  transform: translateX(4px);
+.country-hero .official-name {
+  font-size: 1.1rem;
+  font-style: italic;
+  opacity: 0.9;
 }
 
 .country-details-container {
@@ -255,30 +315,6 @@ nav {
   .country-details-container {
     padding: 1rem;
   }
-}
-
-.country-header {
-  text-align: center;
-}
-.country-header h1 {
-  font-family: "Garamond", "Georgia", serif;
-  font-size: 3rem;
-  color: #65320d;
-}
-@media (max-width: 768px) {
-  .country-header h1 {
-    font-size: 2.5rem;
-  }
-}
-@media (max-width: 480px) {
-  .country-header h1 {
-    font-size: 2rem;
-  }
-}
-.country-header .official-name {
-  font-size: 1.1rem;
-  font-style: italic;
-  opacity: 0.8;
 }
 
 .section-title {
@@ -327,6 +363,9 @@ nav {
   font-size: 0.9rem;
   text-transform: uppercase;
   margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .symbols-container {
@@ -362,28 +401,41 @@ nav {
   padding: 0 1rem;
 }
 
-.translations-list {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 1rem;
-  -moz-column-count: 2;
-       column-count: 2;
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
-}
-@media (max-width: 768px) {
-  .translations-list {
-    -moz-column-count: 1;
-         column-count: 1;
-  }
-}
-.translations-list li {
-  padding: 0.5rem;
-  border-bottom: 1px solid #e0d2b6;
-}
-
 .geography-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.neighbors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.translations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.translation-card {
+  background-color: #fdf6e3;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #e0d2b6;
+  transition: all 0.3s ease;
+}
+.translation-card .translation-lang {
+  font-weight: bold;
+  color: #65320d;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.translation-card .translation-name {
+  font-size: 1.1rem;
+  color: #3d2b1f;
 }/*# sourceMappingURL=main.css.map */
