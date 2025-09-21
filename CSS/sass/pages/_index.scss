@@ -16,6 +16,47 @@ nav {
   gap: calc($spacing-unit * 2.5);
 }
 
+.search-container {
+  margin-bottom: calc($spacing-unit * 2);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+
+  &::before {
+    content: '🔍';
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+    pointer-events: none;
+    font-size: 1.2rem;
+    color: $color-text;
+  }
+}
+
+#search-input {
+  width: 100%;
+  padding: 0.75rem 1.25rem 0.75rem 3.5rem; // Aumentamos el padding izquierdo para el icono
+  font-size: 1.1rem;
+  border-radius: 50px;
+  border: 2px solid $color-border;
+  background-color: $color-background;
+  color: $color-text;
+  transition: all $transition-speed ease;
+
+  &::placeholder {
+    color: var(--color-placeholder);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.2);
+  }
+}
+
 .error-message {
   color: $color-primary-dark;
   font-size: 1.2rem;

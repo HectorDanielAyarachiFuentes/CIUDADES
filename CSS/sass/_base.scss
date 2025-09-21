@@ -9,6 +9,7 @@
   --color-accent: #c89b4f;
   --color-border: #e0d2b6;
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --color-placeholder: #a99a8d; // Color para el texto del placeholder
 }
 
 [data-theme="dark"] {
@@ -22,6 +23,7 @@
   --color-accent: #8b4513;
   --color-border: #444;
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --color-placeholder: #888; // Color del placeholder para el modo oscuro
 }
 
 * {

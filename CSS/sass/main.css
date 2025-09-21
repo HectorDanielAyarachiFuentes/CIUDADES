@@ -9,6 +9,7 @@
   --color-accent: #c89b4f;
   --color-border: #e0d2b6;
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --color-placeholder: #a99a8d;
 }
 
 [data-theme=dark] {
@@ -21,6 +22,7 @@
   --color-accent: #8b4513;
   --color-border: #444;
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --color-placeholder: #888;
 }
 
 * {
@@ -310,6 +312,47 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+}
+.search-container::before {
+  content: "🔍";
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  pointer-events: none;
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+
+#search-input {
+  width: 100%;
+  padding: 0.75rem 1.25rem 0.75rem 3.5rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  border: 2px solid var(--color-border);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+#search-input::-moz-placeholder {
+  color: var(--color-placeholder);
+}
+#search-input::placeholder {
+  color: var(--color-placeholder);
+}
+#search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.2);
 }
 
 .error-message {
