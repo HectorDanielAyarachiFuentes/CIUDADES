@@ -1,0 +1,24 @@
+header, footer {
+  background-color: $color-primary;
+  color: $color-text-light;
+  text-align: center;
+  padding: calc($spacing-unit * 1.5) $spacing-unit;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+header {
+  font-size: 1.5rem;
+  font-family: $font-heading;
+}
+
+section {
+  max-width: 900px;
+  width: 95%;
+  margin: calc($spacing-unit * 2) auto;
+  flex-grow: 1;
+
+  @media (max-width: 480px) {
+    padding: $spacing-unit 0.5rem;
+  }
+}

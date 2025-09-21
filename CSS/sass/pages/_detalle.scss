@@ -1,0 +1,140 @@
+.country-details-container {
+  background-color: $color-surface;
+  padding: calc($spacing-unit * 2);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    padding: $spacing-unit;
+  }
+}
+
+.country-header {
+  text-align: center;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: 3rem;
+    color: $color-primary-dark;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+    @media (max-width: 480px) {
+      font-size: 2rem;
+    }
+  }
+
+  .official-name {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+}
+
+.section-title {
+  font-family: $font-heading;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-top: calc($spacing-unit * 2.5);
+  margin-bottom: $spacing-unit;
+  color: $color-primary-dark;
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background-color: $color-accent;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: $spacing-unit;
+}
+
+.grid-item {
+  background: $color-background;
+  padding: $spacing-unit;
+  border-radius: $border-radius;
+  border: 1px solid $color-border;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    font-family: $font-heading;
+    color: $color-primary-dark;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.symbols-container {
+  display: flex;
+  gap: calc($spacing-unit * 2);
+  align-items: flex-start;
+  margin-top: $spacing-unit;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.symbol-item {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+
+  img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border: 1px solid $color-border;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+
+  p {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: $spacing-unit;
+    padding: 0 1rem;
+  }
+}
+
+.translations-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: $spacing-unit;
+  column-count: 2;
+  column-gap: calc($spacing-unit * 2);
+
+  @media (max-width: 768px) {
+    column-count: 1;
+  }
+
+  li {
+    padding: 0.5rem;
+    border-bottom: 1px solid $color-border;
+  }
+}
+
+.geography-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
