@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- MOSTRAR ANIMACIÓN DE CARGA ---
   listContainer.innerHTML = `
-    <div class="loader-container">
+    <div class="loader-container" role="status" aria-live="polite">
       <div class="loader"></div>
       <p>Cargando países...</p>
     </div>

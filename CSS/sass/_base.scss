@@ -1,3 +1,29 @@
+:root {
+  // Tema Claro (por defecto)
+  --color-background: #fdf6e3;
+  --color-surface: #fbf1d3;
+  --color-primary: #8b4513;
+  --color-primary-dark: #65320d;
+  --color-text: #3d2b1f;
+  --color-text-light: #fffcf2;
+  --color-accent: #c89b4f;
+  --color-border: #e0d2b6;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  // Tema Oscuro
+  --color-background: #1a1a1a;
+  --color-surface: #2c2c2c;
+  --color-primary: #c89b4f;
+  --color-primary-dark: #e0d2b6;
+  --color-text: #f5f5f5;
+  --color-text-light: #1a1a1a;
+  --color-accent: #8b4513;
+  --color-border: #444;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +43,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color $transition-speed ease, color $transition-speed ease;
 
   @media (max-width: 480px) {
     line-height: 1.5;

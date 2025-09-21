@@ -13,25 +13,32 @@
     <link rel="stylesheet" href="CSS\sass\main.css" />
   </head>
   <body>
-    <header>
+    <header role="banner">
       <a class="volver-link" href="index.html">🌍MUNDO🌍</a>
-    
+      <div class="theme-switcher">
+        <input type="checkbox" id="theme-toggle" role="switch" aria-label="Cambiar tema de color">
+        <label for="theme-toggle">
+          <span class="sun-icon" aria-hidden="true">☀️</span>
+          <span class="moon-icon" aria-hidden="true">🌙</span>
+        </label>
+      </div>
     </header>      
 
-    <section>
-      <nav>
-        <button id="guess-button">"Si tu me quieres..."</button>
+    <section role="main">
+      <nav role="navigation" aria-label="Navegación de continentes">
+        <button id="guess-button" aria-pressed="false" aria-label="Reproducir o pausar música">"Si tu me quieres..."</button>
         <audio id="audio-player" src="Hazme-Una-Señal-de-Roberto-Jordan-pero-con-un-dinosaurio-bailando-de-fondo-.mp3"></audio>
         <div id="city-list">
           <!-- Los enlaces se generarán automáticamente aquí desde el JSON -->
         </div>
       </nav>
     </section>
-    <footer>
+    <footer role="contentinfo">
       <p>CIUDADES 🌍</p>
       <p>🌆 Explora. 🗺️ Descubre. ✈️ Viaja.</p>
     </footer>
     <script src="./JS/script.js"></script>
     <script src="./JS/index.js"></script>
+    <script src="./JS/theme.js"></script>
   </body>
 </html>

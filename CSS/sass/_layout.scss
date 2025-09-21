@@ -10,6 +10,7 @@ header, footer {
 header {
   font-size: 1.5rem;
   font-family: $font-heading;
+  position: relative; // Para posicionar el theme-switcher
 }
 
 section {

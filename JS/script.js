@@ -8,12 +8,15 @@ const audioPlayer = document.getElementById("audio-player");
 // Esto evita errores en la consola en la página de detalle.
 if (guessButton && audioPlayer) {
   function playPause() {
-    if (audioPlayer.paused) {
-      audioPlayer.play();
-      guessButton.innerHTML = "¡Dame una sonrisa! 🎶🤘";
-    } else {
+    const isPlaying = !audioPlayer.paused;
+    if (isPlaying) {
       audioPlayer.pause();
       guessButton.innerHTML = "Si tu me quieres...";
+      guessButton.setAttribute('aria-pressed', 'false');
+    } else {
+      audioPlayer.play();
+      guessButton.innerHTML = "¡Dame una sonrisa! 🎶🤘";
+      guessButton.setAttribute('aria-pressed', 'true');
     }
   }
 

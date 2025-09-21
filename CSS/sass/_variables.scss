@@ -1,19 +1,19 @@
-// 1. COLORES
-$color-background: #fdf6e3;
-$color-surface: #fbf1d3;
-$color-primary: #8b4513;
-$color-primary-dark: #65320d;
-$color-text: #3d2b1f;
-$color-text-light: #fffcf2;
-$color-accent: #c89b4f;
-$color-border: #e0d2b6;
-
-// 2. FUENTES
+// 1. FUENTES Y ESPACIADO (NO CAMBIAN CON EL TEMA)
 $font-primary: 'Georgia', 'Times New Roman', Times, serif;
 $font-heading: 'Garamond', 'Georgia', serif;
-
-// 3. ESPACIADO Y OTROS
 $spacing-unit: 1rem;
 $border-radius: 8px;
-$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 $transition-speed: 0.3s;
+
+// 2. COLORES (DEFINIDOS COMO CSS CUSTOM PROPERTIES PARA CAMBIAR DE TEMA)
+// Estos $variables de SASS ahora apuntan a variables de CSS.
+// La definición de estas variables de CSS estará en _base.scss.
+$color-background: var(--color-background);
+$color-surface: var(--color-surface);
+$color-primary: var(--color-primary);
+$color-primary-dark: var(--color-primary-dark);
+$color-text: var(--color-text);
+$color-text-light: var(--color-text-light);
+$color-accent: var(--color-accent);
+$color-border: var(--color-border);
+$box-shadow: var(--box-shadow);

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- MOSTRAR ANIMACIÓN DE CARGA ---
   cityDetailsContainer.innerHTML = `
-    <div class="loader-container">
+    <div class="loader-container" role="status" aria-live="polite">
       <div class="loader"></div>
       <p>Cargando detalles del país...</p>
     </div>
@@ -45,74 +45,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- GENERAR HTML PARA PAÍSES VECINOS ---
     const neighborsHtml = (neighborsData && neighborsData.length > 0) ? `
-      <h2 class="section-title">Países Vecinos</h2>
-      <div class="neighbors-grid">
-        ${neighborsData.map(neighbor => `
-          <a href="detalle.html#${neighbor.cca3}" class="country-card neighbor-card">
-            <img src="${neighbor.flags.svg}" alt="Bandera de ${neighbor.translations.spa.common}" loading="lazy" class="country-card-flag">
-            <span class="country-card-name">${neighbor.translations.spa.common}</span>
-          </a>
-        `).join('')}
-      </div>
+      <section aria-labelledby="neighbors-title">
+        <h2 id="neighbors-title" class="section-title">Países Vecinos</h2>
+        <div class="neighbors-grid">
+          ${neighborsData.map(neighbor => `
+            <a href="detalle.html#${neighbor.cca3}" class="country-card neighbor-card">
+              <img src="${neighbor.flags.svg}" alt="Bandera de ${neighbor.translations.spa.common}" loading="lazy" class="country-card-flag">
+              <span class="country-card-name">${neighbor.translations.spa.common}</span>
+            </a>
+          `).join('')}
+        </div>
+      </section>
     ` : '';
 
     // --- GENERAR EL HTML DINÁMICAMENTE ---
     const countryHtml = `
-      <div class="country-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${selectedCountry.flags.svg}')">
+      <div class="country-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${selectedCountry.flags.svg}')" role="region" aria-label="Cabecera de ${countryName}">
         <h1>${countryName} ${selectedCountry.flag}</h1>
         <p class="official-name">${officialName}</p>
       </div>
 
       <div class="country-details-container">
-        <h2 class="section-title">Datos Generales</h2>
-        <div class="details-grid">
-          <div class="grid-item"><strong><span class="grid-item-icon">🏙️</span>Capital</strong><span>${capital}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">👨‍👩‍👧‍👦</span>Población</strong><span>${population}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">🏞️</span>Área</strong><span>${area}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">🌎</span>Continente</strong><span>${continents}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">📍</span>Subregión</strong><span>${subregion}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">💰</span>Moneda</strong><span>${currency}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">🗣️</span>Idiomas</strong><span>${languages}</span></div>
-          <div class="grid-item"><strong><span class="grid-item-icon">👋</span>Gentilicio</strong><span>${demonym}</span></div>
-        </div>
-
-        <h2 class="section-title">Símbolos Nacionales</h2>
-        <div class="symbols-container">
-          <div class="symbol-item">
-            <h3>Bandera</h3>
-            <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt}" class="country-flag">
-            <p>${selectedCountry.flags.alt ?? 'Descripción no disponible.'}</p>
-          </div>
-          ${selectedCountry.coatOfArms.png ? `
-          <div class="symbol-item">
-            <h3>Escudo de Armas</h3>
-            <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms">
-          </div>
-          ` : ''}
-        </div>
-        
-        <!-- INICIO DE LA SECCIÓN CORREGIDA -->
-        <div class="geography-section">
-          <h2 class="section-title">Geografía y Ubicación</h2>
+        <section aria-labelledby="general-data-title">
+          <h2 id="general-data-title" class="section-title">Datos Generales</h2>
           <div class="details-grid">
-              <div class="grid-item"><strong><span class="grid-item-icon">🗺️</span>Fronteras</strong><span>${borderNames}</span></div>
-              <div class="grid-item"><strong><span class="grid-item-icon">🧭</span>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🏙️</span>Capital</strong><span>${capital}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>Población</strong><span>${population}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🏞️</span>Área</strong><span>${area}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🌎</span>Continente</strong><span>${continents}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">📍</span>Subregión</strong><span>${subregion}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">💰</span>Moneda</strong><span>${currency}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🗣️</span>Idiomas</strong><span>${languages}</span></div>
+            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">👋</span>Gentilicio</strong><span>${demonym}</span></div>
           </div>
-          <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank">Ver en Google Maps</a>
-        </div>
-        <!-- FIN DE LA SECCIÓN CORREGIDA -->
+        </section>
+
+        <section aria-labelledby="national-symbols-title">
+          <h2 id="national-symbols-title" class="section-title">Símbolos Nacionales</h2>
+          <div class="symbols-container">
+            <div class="symbol-item">
+              <h3>Bandera</h3>
+              <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt}" class="country-flag">
+              <p>${selectedCountry.flags.alt ?? 'Descripción no disponible.'}</p>
+            </div>
+            ${selectedCountry.coatOfArms.png ? `
+            <div class="symbol-item">
+              <h3>Escudo de Armas</h3>
+              <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms">
+            </div>
+            ` : ''}
+          </div>
+        </section>
+
+        <section aria-labelledby="geography-title">
+          <div class="geography-section">
+            <h2 id="geography-title" class="section-title">Geografía y Ubicación</h2>
+            <div class="details-grid">
+                <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🗺️</span>Fronteras</strong><span>${borderNames}</span></div>
+                <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🧭</span>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
+            </div>
+            <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank" rel="noopener noreferrer" aria-label="Ver en Google Maps (se abre en una nueva pestaña)">Ver en Google Maps</a>
+          </div>
+        </section>
 
         ${neighborsHtml}
 
-        <h2 class="section-title">Nombres en otros idiomas</h2>
-        <div class="translations-grid">
-          ${Object.entries(selectedCountry.translations).map(([key, value]) => `
-            <div class="translation-card">
-              <div class="translation-lang">${languageNames[key] || key.toUpperCase()}</div>
-              <div class="translation-name">${value.common}</div>
-            </div>
-          `).join('')}
-        </div>
+        <section aria-labelledby="translations-title">
+          <h2 id="translations-title" class="section-title">Nombres en otros idiomas</h2>
+          <div class="translations-grid">
+            ${Object.entries(selectedCountry.translations).map(([key, value]) => `
+              <div class="translation-card">
+                <div class="translation-lang">${languageNames[key] || key.toUpperCase()}</div>
+                <div class="translation-name">${value.common}</div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
 
       </div>
     `;

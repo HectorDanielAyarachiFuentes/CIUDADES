@@ -9,18 +9,26 @@
     <link rel="stylesheet" href="CSS\sass\main.css" />
 </head>
 <body>
-  <header>
+  <header role="banner">
     <a class="volver-link" href="index.html">← Volver al Inicio</a>
+    <div class="theme-switcher">
+      <input type="checkbox" id="theme-toggle" role="switch" aria-label="Cambiar tema de color">
+      <label for="theme-toggle">
+        <span class="sun-icon" aria-hidden="true">☀️</span>
+        <span class="moon-icon" aria-hidden="true">🌙</span>
+      </label>
+    </div>
   </header>
-  <section>
+  <section role="main">
     <!-- Aquí se mostrará el contenido de las ciudades -->
     <div id="city-details"></div>
   </section>
-  <footer>
+  <footer role="contentinfo">
     <p>CIUDADES 🌍</p>
     <p>🌆 Explora. 🗺️ Descubre. ✈️ Viaja.</p>
   </footer>
   <script src="./JS/script.js"></script>
   <script src="./JS/detalle.js"></script>
+  <script src="./JS/theme.js"></script>
 </body>
 </html>
