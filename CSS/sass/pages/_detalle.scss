@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .country-hero {
   background-size: cover;
   background-position: center;
@@ -51,14 +53,23 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scaleX(0);
     width: 80px;
     height: 2px;
     background-color: $color-accent;
+    transform-origin: center;
+    // Animate the underline on page load
+    animation: expand-underline 0.8s 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   }
 
   @media (max-width: 480px) {
     font-size: 1.5rem;
+  }
+}
+
+@keyframes expand-underline {
+  to {
+    transform: translateX(-50%) scaleX(1);
   }
 }
 
@@ -147,7 +158,13 @@
   border-radius: $border-radius;
   padding: $spacing-unit;
   border: 1px solid $color-border;
-  transition: all $transition-speed ease;
+  transition: transform $transition-speed ease, box-shadow $transition-speed ease, border-color $transition-speed ease;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: $box-shadow;
+    border-color: $color-accent;
+  }
 
   .translation-lang {
     font-weight: bold;

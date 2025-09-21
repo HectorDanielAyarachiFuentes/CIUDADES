@@ -1,15 +1,15 @@
 // 1. Variables y configuración
-@import 'variables';
+// Las variables ahora se cargan directamente en los parciales que las necesitan.
 
 // 2. Base y reset
-@import 'base';
+@use 'base';
 
 // 3. Maquetación (Layout)
-@import 'layout';
+@use 'layout';
 
 // 4. Componentes reutilizables
-@import 'components';
+@use 'components';
 
 // 5. Estilos específicos de página
-@import 'pages/index';
-@import 'pages/detalle';
+@use 'pages/index';
+@use 'pages/detalle';

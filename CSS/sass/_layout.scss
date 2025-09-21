@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 header, footer {
   background-color: $color-primary;
   color: $color-text-light;

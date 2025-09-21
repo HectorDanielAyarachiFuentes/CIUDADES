@@ -119,6 +119,7 @@ section {
   font-weight: bold;
   margin-bottom: 2rem;
   transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 #guess-button:hover, #guess-button:focus {
   background-image: linear-gradient(45deg, var(--color-accent-light), var(--color-accent));
@@ -126,6 +127,7 @@ section {
   box-shadow: 0 4px 10px var(--color-accent-shadow);
   transform: translateY(-3px);
   border-color: transparent;
+  letter-spacing: 1px;
 }
 
 #google-maps-link {
@@ -234,19 +236,20 @@ section {
   background-color: var(--color-background);
   border-radius: 8px;
   border: 1px solid var(--color-border);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-out;
   text-align: center;
   height: 100%;
 }
 .country-card:hover, .country-card:focus {
   transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
   color: var(--color-primary-dark);
   border-color: var(--color-accent);
 }
 .country-card:hover .country-card-flag, .country-card:focus .country-card-flag {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 .country-card .country-card-flag {
   width: 100%;
@@ -254,7 +257,7 @@ section {
   object-fit: cover;
   border-radius: 4px;
   border: 1px solid var(--color-border);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .country-card .country-card-name {
   font-weight: 600;
@@ -402,7 +405,6 @@ nav {
 #search-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.2);
   box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.2);
 }
 
@@ -417,7 +419,9 @@ nav {
   color: var(--color-primary-dark);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 2px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, var(--color-accent), var(--color-primary-dark));
   text-align: center;
 }
 @media (max-width: 480px) {
@@ -495,10 +499,12 @@ nav {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scaleX(0);
   width: 80px;
   height: 2px;
   background-color: var(--color-accent);
+  transform-origin: center;
+  animation: expand-underline 0.8s 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 @media (max-width: 480px) {
   .section-title {
@@ -506,6 +512,11 @@ nav {
   }
 }
 
+@keyframes expand-underline {
+  to {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
 .details-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -589,7 +600,12 @@ nav {
   border-radius: 8px;
   padding: 1rem;
   border: 1px solid var(--color-border);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.translation-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--box-shadow);
+  border-color: var(--color-accent);
 }
 .translation-card .translation-lang {
   font-weight: bold;

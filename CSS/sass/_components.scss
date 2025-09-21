@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .volver-link {
   display: inline-block;
   text-decoration: none;
@@ -33,12 +35,16 @@
   margin-bottom: calc($spacing-unit * 2);
   transition: all $transition-speed ease;
 
+  // Adding a bit more flair
+  letter-spacing: 0.5px;
+
   &:hover, &:focus {
     background-image: linear-gradient(45deg, $color-accent-light, $color-accent);
     color: $color-text-light;
     box-shadow: 0 4px 10px $color-accent-shadow;
     transform: translateY(-3px);
     border-color: transparent;
+    letter-spacing: 1px;
   }
 }
 
@@ -156,20 +162,22 @@
   background-color: $color-background;
   border-radius: $border-radius;
   border: 1px solid $color-border;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  transition: transform $transition-speed ease, box-shadow $transition-speed ease, border-color $transition-speed ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: all $transition-speed ease-out;
   text-align: center;
   height: 100%;
 
   &:hover, &:focus {
     transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
     color: $color-primary-dark;
     border-color: $color-accent;
+  }
 
-    .country-card-flag {
-      transform: scale(1.05);
-    }
+  &:hover .country-card-flag,
+  &:focus .country-card-flag {
+    transform: scale(1.08);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
   }
 
   .country-card-flag {
@@ -178,7 +186,7 @@
     object-fit: cover;
     border-radius: $border-radius - 4px;
     border: 1px solid $color-border;
-    transition: transform $transition-speed ease;
+    transition: transform $transition-speed ease, box-shadow $transition-speed ease;
   }
 
   .country-card-name {

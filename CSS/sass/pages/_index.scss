@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 nav {
   background: $color-surface;
   padding: calc($spacing-unit * 2);
@@ -69,7 +71,9 @@ nav {
     color: $color-primary-dark;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid $color-border;
+    border-bottom: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left, $color-accent, $color-primary-dark);
     text-align: center;
 
     @media (max-width: 480px) {
