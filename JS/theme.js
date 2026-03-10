@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para aplicar el tema
   const applyTheme = (theme) => {
-    if (theme === 'dark') {
-      htmlElement.setAttribute('data-theme', 'dark');
+    if (theme === 'light') {
+      htmlElement.setAttribute('data-theme', 'light');
       if (themeToggle) {
-        themeToggle.checked = true;
+        themeToggle.checked = true; // El toggle activo ahora significa modo claro
         themeToggle.setAttribute('aria-checked', 'true');
       }
     } else {
-      htmlElement.removeAttribute('data-theme');
+      htmlElement.removeAttribute('data-theme'); // Por defecto es oscuro ahora
       if (themeToggle) {
         themeToggle.checked = false;
         themeToggle.setAttribute('aria-checked', 'false');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Listener para el interruptor
   if (themeToggle) {
     themeToggle.addEventListener('change', (e) => {
-      const newTheme = e.target.checked ? 'dark' : 'light';
+      const newTheme = e.target.checked ? 'light' : 'dark';
       applyTheme(newTheme);
       localStorage.setItem('theme', newTheme);
     });

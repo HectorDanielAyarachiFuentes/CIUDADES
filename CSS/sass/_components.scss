@@ -1,7 +1,10 @@
 @use 'variables' as *;
 
 .volver-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   text-decoration: none;
   font-family: $font-heading; // Use heading font for MUNDO
   font-weight: normal; // From the image, it looks like a clean serif, not necessarily super bold
@@ -25,8 +28,18 @@
     transform: scale(1.02);
   }
 
+  .gold-sphere {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 4px; // Slight visual alignment adjustment
+  }
+
   @media (max-width: 480px) {
     font-size: 1.8rem;
+    .gold-sphere {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 
@@ -247,30 +260,41 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50px;
-    height: 26px;
-    background-color: $color-primary-dark;
+    width: 60px; // A bit wider to match the image
+    height: 30px; // A bit taller
+    background: linear-gradient(to bottom, #d4af37 0%, #a8832a 100%); // Gold metallic background
     border-radius: 50px;
     position: relative;
     padding: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0,0,0,0.2); // Inner dark shadow
     transition: background-color $transition-speed ease;
 
     &::after {
       content: '';
       position: absolute;
-      width: 18px;
-      height: 18px;
+      width: 22px; // Slightly larger circle
+      height: 22px;
       border-radius: 50%;
-      background-color: $color-text-light;
+      background-color: #ffffff; // Pure white circle as shown in the image
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); // Shadow for the button
       top: 4px;
       left: 4px;
       transition: transform $transition-speed ease;
     }
   }
 
-  .sun-icon, .moon-icon { font-size: 0.9rem; }
+  .sun-icon, .moon-icon { 
+    font-size: 0.9rem; 
+    z-index: 1; // Above the background
+  }
+  
+  // Ocultar iconos de luna y sol si el diseño es minimalista, o dejarlos como en la imagen. En la imagen parece haber un icono de sol a la izquierda.
+  .moon-icon { opacity: 0; } // The ref image only clearly shows a sun icon on the left
 
-  input:checked + label::after { transform: translateX(24px); }
+  input:checked + label::after { transform: translateX(30px); }
+  
+  // When light mode is active, maybe we want it less golden? Or keep it gold.
+  // The image shows it gold when the circle is on the right.
 }
 
 // --- BOTÓN VOLVER ARRIBA ---
