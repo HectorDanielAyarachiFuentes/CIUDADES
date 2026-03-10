@@ -1,11 +1,10 @@
 @use 'variables' as *;
 
 header, footer {
-  background-color: $color-primary;
+  background-color: transparent; // Hacemos el color transparente para que el fondo unificado prevalezca
   color: $color-text-light;
   text-align: center;
   padding: calc($spacing-unit * 1.5) $spacing-unit;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
 
@@ -13,6 +12,7 @@ header {
   font-size: 1.5rem;
   font-family: $font-heading;
   position: relative; // Para posicionar el theme-switcher
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); // Línea sutil separadora
 }
 
 section {

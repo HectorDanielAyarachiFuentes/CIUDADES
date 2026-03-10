@@ -2,8 +2,11 @@
 
 nav {
   background: $color-surface;
-  padding: calc($spacing-unit * 2);
-  border-radius: $border-radius;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: calc($spacing-unit * 2) calc($spacing-unit * 3);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08); // Subtle glass border
   box-shadow: $box-shadow;
   text-align: center;
 
@@ -26,36 +29,37 @@ nav {
   max-width: 500px;
 
   &::before {
-    content: '🔍';
+    content: 'ⓘ';
     position: absolute;
     left: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0.5;
+    opacity: 0.8;
     pointer-events: none;
-    font-size: 1.2rem;
-    color: $color-text;
+    font-size: 1.1rem;
+    color: #a0aabf;
   }
 }
 
 #search-input {
   width: 100%;
-  padding: 0.75rem 1.25rem 0.75rem 3.5rem; // Aumentamos el padding izquierdo para el icono
-  font-size: 1.1rem;
+  padding: 0.75rem 1.25rem 0.75rem 3rem; // Padding for icon
+  font-size: 1rem;
   border-radius: 50px;
-  border: 2px solid $color-border;
-  background-color: $color-background;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.25);
   color: $color-text;
   transition: all $transition-speed ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
 
   &::placeholder {
-    color: var(--color-placeholder);
+    color: #a0aabf;
   }
 
   &:focus {
     outline: none;
-    border-color: $color-primary;
-    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.2);
+    border-color: $color-primary-dark;
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.3), inset 0 2px 5px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -67,14 +71,14 @@ nav {
 .continent-group {
   .continent-title {
     font-family: $font-heading;
-    font-size: 2rem;
-    color: $color-primary-dark;
+    font-size: 1.8rem;
+    color: $color-primary; // Gold font for title
     padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(to left, $color-accent, $color-primary-dark);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
+    letter-spacing: 1px;
 
     @media (max-width: 480px) {
       font-size: 1.6rem;
@@ -85,7 +89,7 @@ nav {
     list-style-type: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: $spacing-unit * 1.5;
 
     li {

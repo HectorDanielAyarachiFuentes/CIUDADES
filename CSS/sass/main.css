@@ -1,5 +1,21 @@
 @charset "UTF-8";
 :root {
+  --color-background: #0d1424;
+  --color-surface: rgba(23, 34, 59, 0.65);
+  --color-primary: #d4af37;
+  --color-primary-rgb: 212, 175, 55;
+  --color-primary-dark: #b8972e;
+  --color-text: #e0e0e0;
+  --color-text-light: #ffffff;
+  --color-accent: #c89b4f;
+  --color-accent-light: #e6c888;
+  --color-accent-shadow: rgba(212, 175, 55, 0.4);
+  --color-border: rgba(255, 255, 255, 0.15);
+  --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --color-placeholder: #8b99af;
+}
+
+[data-theme=light] {
   --color-background: #fdf6e3;
   --color-surface: #fbf1d3;
   --color-primary: #8b4513;
@@ -15,22 +31,6 @@
   --color-placeholder: #a99a8d;
 }
 
-[data-theme=dark] {
-  --color-background: #1a1a1a;
-  --color-surface: #2c2c2c;
-  --color-primary: #c89b4f;
-  --color-primary-rgb: 200, 155, 79;
-  --color-primary-dark: #e0d2b6;
-  --color-text: #f5f5f5;
-  --color-text-light: #1a1a1a;
-  --color-accent: #8b4513;
-  --color-accent-light: #a85a20;
-  --color-accent-shadow: rgba(139, 69, 19, 0.4);
-  --color-border: #444;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --color-placeholder: #888;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -43,7 +43,7 @@ html {
 }
 
 body {
-  font-family: "Georgia", "Times New Roman", Times, serif;
+  font-family: "Open Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
@@ -59,11 +59,10 @@ body {
 }
 
 header, footer {
-  background-color: var(--color-primary);
+  background-color: transparent;
   color: var(--color-text-light);
   text-align: center;
   padding: 1.5rem 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
 
@@ -71,6 +70,7 @@ header {
   font-size: 1.5rem;
   font-family: "Garamond", "Georgia", serif;
   position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 section {
@@ -88,21 +88,25 @@ section {
 .volver-link {
   display: inline-block;
   text-decoration: none;
-  color: var(--color-text-light);
-  font-weight: bold;
-  font-size: 1.8rem;
+  font-family: "Garamond", "Georgia", serif;
+  font-weight: normal;
+  font-size: 2.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease-out;
+  letter-spacing: 2px;
+  background: linear-gradient(to bottom, #f9e596 0%, #c89b4f 50%, #8b6b32 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
 }
 .volver-link:hover, .volver-link:focus {
-  background-color: var(--color-text-light);
-  color: var(--color-primary);
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 @media (max-width: 480px) {
   .volver-link {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -230,40 +234,39 @@ section {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem;
+  padding: 0.5rem;
   text-decoration: none;
   color: var(--color-text);
-  background-color: var(--color-background);
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease-out;
+  background-color: transparent;
+  border: none;
+  transition: transform 0.3s ease-out;
   text-align: center;
   height: 100%;
 }
 .country-card:hover, .country-card:focus {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-  color: var(--color-primary-dark);
-  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  color: var(--color-accent-light);
 }
 .country-card:hover .country-card-flag, .country-card:focus .country-card-flag {
-  transform: scale(1.08);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  box-shadow: inset 0 0 0 4px #b8972e, 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 10px rgba(212, 175, 55, 0.3);
 }
 .country-card .country-card-flag {
-  width: 100%;
-  height: 60px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #6b5530;
+  box-shadow: inset 0 0 0 4px #e0ba48, inset 0 0 12px rgba(0, 0, 0, 0.6), 1px 1px 0px 1px #3a2e18, 0 6px 10px rgba(0, 0, 0, 0.5);
+  background: #000;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .country-card .country-card-name {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-family: "Garamond", "Georgia", serif;
+  font-weight: 500;
+  font-size: 1.05rem;
   line-height: 1.2;
+  letter-spacing: 0.5px;
 }
 
 .neighbor-card {
@@ -354,8 +357,11 @@ section {
 
 nav {
   background: var(--color-surface);
-  padding: 2rem;
-  border-radius: 8px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--box-shadow);
   text-align: center;
 }
@@ -379,37 +385,35 @@ nav {
   max-width: 500px;
 }
 .search-container::before {
-  content: "🔍";
+  content: "ⓘ";
   position: absolute;
   left: 1.25rem;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0.5;
+  opacity: 0.8;
   pointer-events: none;
-  font-size: 1.2rem;
-  color: var(--color-text);
+  font-size: 1.1rem;
+  color: #a0aabf;
 }
 
 #search-input {
   width: 100%;
-  padding: 0.75rem 1.25rem 0.75rem 3.5rem;
-  font-size: 1.1rem;
+  padding: 0.75rem 1.25rem 0.75rem 3rem;
+  font-size: 1rem;
   border-radius: 50px;
-  border: 2px solid var(--color-border);
-  background-color: var(--color-background);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.25);
   color: var(--color-text);
   transition: all 0.3s ease;
-}
-#search-input::-moz-placeholder {
-  color: var(--color-placeholder);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 #search-input::placeholder {
-  color: var(--color-placeholder);
+  color: #a0aabf;
 }
 #search-input:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.2);
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.3), inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .error-message {
@@ -419,14 +423,14 @@ nav {
 
 .continent-group .continent-title {
   font-family: "Garamond", "Georgia", serif;
-  font-size: 2rem;
-  color: var(--color-primary-dark);
+  font-size: 1.8rem;
+  color: var(--color-primary);
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(to left, var(--color-accent), var(--color-primary-dark));
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
+  letter-spacing: 1px;
 }
 @media (max-width: 480px) {
   .continent-group .continent-title {
@@ -437,188 +441,283 @@ nav {
   list-style-type: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 .continent-group .country-sublist li {
   list-style: none;
 }
 
-.country-hero {
-  background-size: cover;
-  background-position: center;
-  padding: 3rem 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: var(--color-text-light);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-.country-hero h1 {
-  font-family: "Garamond", "Georgia", serif;
-  font-size: 3rem;
-  color: var(--color-text-light);
-}
-@media (max-width: 768px) {
-  .country-hero h1 {
-    font-size: 2.5rem;
-  }
-}
-@media (max-width: 480px) {
-  .country-hero h1 {
-    font-size: 2rem;
-  }
-}
-.country-hero .official-name {
-  font-size: 1.1rem;
-  font-style: italic;
-  opacity: 0.9;
-}
-
 .country-details-container {
-  background-color: var(--color-surface);
-  padding: 2rem;
-  border-radius: 8px;
+  background: var(--color-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--box-shadow);
   width: 100%;
+  color: var(--color-text);
+  max-width: 1200px;
+  margin: 0 auto;
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .country-details-container {
     padding: 1rem;
   }
 }
 
-.section-title {
-  font-family: "Garamond", "Georgia", serif;
-  font-size: 1.8rem;
-  text-align: center;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--color-primary-dark);
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 80px;
-  height: 2px;
-  background-color: var(--color-accent);
-  transform-origin: center;
-  animation: expand-underline 0.8s 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-@media (max-width: 480px) {
-  .section-title {
-    font-size: 1.5rem;
-  }
-}
-
-@keyframes expand-underline {
-  to {
-    transform: translateX(-50%) scaleX(1);
-  }
-}
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-}
-
-.grid-item {
-  background: var(--color-background);
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  display: flex;
-  flex-direction: column;
-}
-.grid-item strong {
-  font-family: "Garamond", "Georgia", serif;
-  color: var(--color-primary-dark);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  margin-bottom: 0.25rem;
+.detail-hero {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-}
-
-.symbols-container {
-  display: flex;
+  justify-content: center;
   gap: 2rem;
-  align-items: flex-start;
-  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.detail-hero .hero-emblem {
+  width: 60px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+.detail-hero .hero-titles {
+  text-align: center;
+}
+.detail-hero .hero-titles h1 {
+  font-family: "Garamond", "Georgia", serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin: 0;
+  background: linear-gradient(to bottom, #f9e596 0%, #d4af37 50%, #8b6b32 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 @media (max-width: 768px) {
-  .symbols-container {
-    flex-direction: column;
-    align-items: center;
+  .detail-hero .hero-titles h1 {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .detail-hero .hero-titles h1 {
+    font-size: 2rem;
+  }
+}
+.detail-hero .hero-titles .official-name {
+  font-size: 1rem;
+  font-style: italic;
+  color: #a0aabf;
+  margin-top: 0.5rem;
+  max-width: 600px;
+}
+
+.detail-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 1024px) {
+  .detail-main-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .detail-main-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-.symbol-item {
-  flex: 1;
-  min-width: 250px;
-  text-align: center;
-}
-.symbol-item img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-}
-.symbol-item p {
-  font-size: 0.9rem;
-  font-style: italic;
-  margin-top: 1rem;
-  padding: 0 1rem;
+.detail-column {
+  display: flex;
+  flex-direction: column;
 }
 
-.geography-section {
+.section-title {
+  font-family: "Garamond", "Georgia", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: #e6c888;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  letter-spacing: 1px;
+}
+
+.data-boxes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+@media (max-width: 768px) {
+  .data-boxes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+.data-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #d4af37;
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+.data-box:hover {
+  transform: translateY(-2px);
+  border-color: #f9e596;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.data-box .box-label {
+  font-family: "Garamond", "Georgia", serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #e6c888;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.5px;
+}
+.data-box .box-label .box-icon {
+  font-size: 0.9rem;
+}
+.data-box .box-value {
+  font-size: 0.95rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.national-symbols {
+  align-items: center;
+}
+.national-symbols .symbols-flex {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.national-symbols .symbol-item {
+  text-align: center;
+}
+.national-symbols .symbol-item h3 {
+  font-family: "Garamond", "Georgia", serif;
+  font-size: 1rem;
+  color: #a0aabf;
+  font-weight: normal;
+  margin-bottom: 0.75rem;
+}
+.national-symbols .flag-ring {
+  border-radius: 50%;
+  border: 4px solid #6b5530;
+  box-shadow: inset 0 0 0 6px #e0ba48, inset 0 0 16px rgba(0, 0, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.6);
+  background: #000;
+  padding: 0;
+  display: inline-flex;
+}
+.national-symbols .flag-ring img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.national-symbols .coat-of-arms-container img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+.national-symbols .flag-description {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  font-style: italic;
+  max-width: 80%;
+  margin-bottom: 2rem;
+}
+
+#google-maps-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: "Garamond", "Georgia", serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 4px;
+  color: #1a1a1a;
+  background: linear-gradient(to bottom, #f9e596 0%, #d4af37 50%, #b8972e 100%);
+  border: 1px solid #6b5530;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+#google-maps-btn .btn-icon {
+  font-size: 1.1rem;
+}
+#google-maps-btn:hover, #google-maps-btn:focus {
+  background: linear-gradient(to bottom, #fff0b3 0%, #e0ba48 50%, #c89b4f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.neighbors-translations .neighbors-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.neighbors-translations .no-neighbors {
+  text-align: center;
+  color: #a0aabf;
+  font-style: italic;
+  margin-bottom: 2.5rem;
+}
+.neighbors-translations .neighbor-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
-
-.neighbors-grid {
+.neighbors-translations .neighbor-badge:hover {
+  transform: translateY(-4px);
+}
+.neighbors-translations .neighbor-badge:hover .neighbor-name {
+  color: #f9e596;
+}
+.neighbors-translations .neighbor-badge .neighbor-flag {
+  width: 60px;
+  height: 60px;
+}
+.neighbors-translations .neighbor-badge .neighbor-name {
+  font-family: "Garamond", "Georgia", serif;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+.neighbors-translations .translations-heading {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+.neighbors-translations .translations-box-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
-
-.translations-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.translation-card {
-  background-color: var(--color-background);
-  border-radius: 8px;
-  padding: 1rem;
-  border: 1px solid var(--color-border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.translation-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: var(--box-shadow);
-  border-color: var(--color-accent);
-}
-.translation-card .translation-lang {
-  font-weight: bold;
-  color: var(--color-primary-dark);
+.neighbors-translations .translation-box .box-value {
   font-size: 0.85rem;
-  text-transform: uppercase;
-  margin-bottom: 0.25rem;
 }
-.translation-card .translation-name {
-  font-size: 1.1rem;
-  color: var(--color-text);
-}/*# sourceMappingURL=main.css.map */
+
+/*# sourceMappingURL=main.css.map */

@@ -60,68 +60,103 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- GENERAR EL HTML DINÁMICAMENTE ---
     const countryHtml = `
-      <div class="country-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${selectedCountry.flags.svg}')" role="region" aria-label="Cabecera de ${countryName}">
-        <h1>${countryName} ${selectedCountry.flag}</h1>
-        <p class="official-name">${officialName}</p>
-      </div>
-
       <div class="country-details-container">
-        <section aria-labelledby="general-data-title">
-          <h2 id="general-data-title" class="section-title">Datos Generales</h2>
-          <div class="details-grid">
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🏙️</span>Capital</strong><span>${capital}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>Población</strong><span>${population}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🏞️</span>Área</strong><span>${area}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🌎</span>Continente</strong><span>${continents}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">📍</span>Subregión</strong><span>${subregion}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">💰</span>Moneda</strong><span>${currency}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🗣️</span>Idiomas</strong><span>${languages}</span></div>
-            <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">👋</span>Gentilicio</strong><span>${demonym}</span></div>
+        
+        <header class="detail-hero">
+          <img src="https://raw.githubusercontent.com/HectorDanielAyarachiFuentes/CIUDADES/main/Imagenes/zebra.png" alt="" class="hero-emblem" aria-hidden="true" onerror="this.style.display='none'">
+          <div class="hero-titles">
+            <h1>${countryName} ${selectedCountry.cca2}</h1>
+            <p class="official-name">${officialName}</p>
           </div>
-        </section>
+          <img src="https://raw.githubusercontent.com/HectorDanielAyarachiFuentes/CIUDADES/main/Imagenes/zebra.png" alt="" class="hero-emblem" style="transform: scaleX(-1);" aria-hidden="true" onerror="this.style.display='none'">
+        </header>
 
-        <section aria-labelledby="national-symbols-title">
-          <h2 id="national-symbols-title" class="section-title">Símbolos Nacionales</h2>
-          <div class="symbols-container">
-            <div class="symbol-item">
-              <h3>Bandera</h3>
-              <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt ?? ''}" class="country-flag" loading="lazy" decoding="async" width="300" height="200">
-              <p>${selectedCountry.flags.alt ?? 'Descripción no disponible.'}</p>
-            </div>
-            ${selectedCountry.coatOfArms.png ? `
-            <div class="symbol-item">
-              <h3>Escudo de Armas</h3>
-              <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms" loading="lazy" decoding="async" width="200" height="200">
-            </div>
-            ` : ''}
-          </div>
-        </section>
-
-        <section aria-labelledby="geography-title">
-          <div class="geography-section">
-            <h2 id="geography-title" class="section-title">Geografía y Ubicación</h2>
-            <div class="details-grid">
-                <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🗺️</span>Fronteras</strong><span>${borderNames}</span></div>
-                <div class="grid-item"><strong><span class="grid-item-icon" aria-hidden="true">🧭</span>Lat/Lng</strong><span>${selectedCountry.latlng.join(', ')}</span></div>
-            </div>
-            <a id="google-maps-link" href="${selectedCountry.maps.googleMaps}" target="_blank" rel="noopener noreferrer" aria-label="Ver en Google Maps (se abre en una nueva pestaña)">Ver en Google Maps</a>
-          </div>
-        </section>
-
-        ${neighborsHtml}
-
-        <section aria-labelledby="translations-title">
-          <h2 id="translations-title" class="section-title">Nombres en otros idiomas</h2>
-          <div class="translations-grid">
-            ${Object.entries(selectedCountry.translations).map(([key, value]) => `
-              <div class="translation-card">
-                <div class="translation-lang">${languageNames[key] || key.toUpperCase()}</div>
-                <div class="translation-name">${value.common}</div>
+        <div class="detail-main-grid">
+          
+          <!-- COLUMNA 1: Datos Generales -->
+          <section class="detail-column general-data" aria-labelledby="general-data-title">
+            <h2 id="general-data-title" class="section-title">Datos Generales</h2>
+            <div class="data-boxes-grid">
+              <div class="data-box">
+                <span class="box-label"><span class="box-icon">🏛️</span> CAPITAL</span>
+                <span class="box-value">${capital}</span>
               </div>
-            `).join('')}
-          </div>
-        </section>
+              <div class="data-box">
+                <span class="box-label"><span class="box-icon">👥</span> POBLACIÓN</span>
+                <span class="box-value">${population}</span>
+              </div>
+              <div class="data-box">
+                <span class="box-label"><span class="box-icon">🌍</span> CONTINENTE</span>
+                <span class="box-value">${continents}</span>
+              </div>
+              <div class="data-box">
+                <span class="box-label"><span class="box-icon">📏</span> ÁREA</span>
+                <span class="box-value">${area}</span>
+              </div>
+              <div class="data-box">
+                <span class="box-label"><span class="box-icon">🗣️</span> IDIOMAS</span>
+                <span class="box-value">${languages}</span>
+              </div>
+              <div class="data-box">
+                <span class="box-label"><span class="box-icon">💰</span> MONEDA</span>
+                <span class="box-value">${currency}</span>
+              </div>
+            </div>
+          </section>
 
+          <!-- COLUMNA 2: Símbolos Nacionales -->
+          <section class="detail-column national-symbols" aria-labelledby="national-symbols-title">
+            <h2 id="national-symbols-title" class="section-title">Símbolos Nacionales</h2>
+            <div class="symbols-flex">
+              <div class="symbol-item">
+                <h3>Bandera</h3>
+                <div class="thick-metallic-ring flag-ring">
+                  <img src="${selectedCountry.flags.svg}" alt="${selectedCountry.flags.alt ?? ''}" class="country-card-flag" loading="lazy" width="150" height="150">
+                </div>
+              </div>
+              ${selectedCountry.coatOfArms.png ? `
+              <div class="symbol-item">
+                <h3>Escudo de Armas</h3>
+                <div class="coat-of-arms-container">
+                  <img src="${selectedCountry.coatOfArms.png}" alt="Escudo de armas de ${countryName}" class="country-coat-of-arms" loading="lazy" width="150" height="150">
+                </div>
+              </div>
+              ` : ''}
+            </div>
+            
+            <p class="flag-description">${selectedCountry.flags.alt ?? 'Descripción de bandera no disponible.'}</p>
+            
+            <a id="google-maps-btn" href="${selectedCountry.maps.googleMaps}" target="_blank" rel="noopener noreferrer" aria-label="Ver en Google Maps">
+              <span class="btn-icon">🌐</span> Ver en Google Maps
+            </a>
+          </section>
+
+          <!-- COLUMNA 3: Países Vecinos y Traducciones -->
+          <section class="detail-column neighbors-translations" aria-labelledby="neighbors-title">
+            <h2 id="neighbors-title" class="section-title">Países Vecinos</h2>
+            ${neighborsData && neighborsData.length > 0 ? `
+              <div class="neighbors-row">
+                ${neighborsData.map(neighbor => `
+                  <a href="detalle.html#${neighbor.cca3}" class="neighbor-badge">
+                    <img src="${neighbor.flags.svg}" alt="Bandera de ${neighbor.translations.spa.common}" class="country-card-flag neighbor-flag" loading="lazy" width="80" height="80">
+                    <span class="neighbor-name">${neighbor.translations.spa.common}</span>
+                  </a>
+                `).join('')}
+              </div>
+            ` : '<p class="no-neighbors">No comparte fronteras terrestres.</p>'}
+
+            <h2 id="translations-title" class="section-title translations-heading">Nombres en otros idiomas</h2>
+            <div class="translations-box-grid">
+              ${Object.entries(selectedCountry.translations).slice(0, 6).map(([key, value]) => `
+                <div class="data-box translation-box">
+                  <span class="box-label">${languageNames[key] || key.toUpperCase()}</span>
+                  <span class="box-value">${value.common}</span>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+        </div>
       </div>
     `;
 
